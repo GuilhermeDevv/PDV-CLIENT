@@ -4,6 +4,10 @@ interface ITheme {
   background: string;
   primary: string;
   secundary: string;
+  icon: string;
+  iconActive: string;
+  BackgroundIconActive: string;
+
   textSecundary: string;
   deleteColor: string;
   button: string;
@@ -13,9 +17,13 @@ interface ITheme {
 }
 
 const LightTheme: ITheme = {
-  background: "#f5f5f5",
-  primary: "#5061fc",
-  secundary: "#b3bbff",
+  background: "#000",
+  primary: "#262626",
+  secundary: "#fff",
+  icon: "#fff",
+  iconActive: "#f00",
+  BackgroundIconActive: "#2d2c2c",
+
   textSecundary: "#a0a0a0",
   deleteColor: "#ff4d4d",
   button: "#0070f3",

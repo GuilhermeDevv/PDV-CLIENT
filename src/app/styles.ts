@@ -6,12 +6,14 @@ export const Main = styled.main`
   height: 100%;
 `;
 
-export const Container = styled.section`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 400px;
-  margin: auto;
+  gap: 1rem;
+  width: calc(100% - 60px);
   height: 100%;
-  gap: 8px;
+  position: absolute;
+  top: 0;
+  left: 60px;
+  padding: 2.5rem;
 `;
