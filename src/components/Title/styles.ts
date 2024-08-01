@@ -5,4 +5,5 @@ export const Title = styled.h1`
   font-weight: 700;
   color: ${({ theme }) => theme.secundary};
   margin-bottom: 16px;
+  align-self: flex-end;
 `;

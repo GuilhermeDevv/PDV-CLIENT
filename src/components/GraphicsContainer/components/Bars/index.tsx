@@ -11,21 +11,12 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { IGraphicsProps } from "@/types/IDashboard";
 
-export function Bars() {
-  const data = [
-    { name: "Segunda", Atual: 4000, Passada: 2400 },
-    { name: "Terça", Atual: 3000, Passada: 1398 },
-    { name: "Quarta", Atual: 2000, Passada: 9800 },
-    { name: "Quinta", Atual: 2780, Passada: 3908 },
-    { name: "Sexta", Atual: 1890, Passada: 4800 },
-    { name: "Sábado", Atual: 2390, Passada: 3800 },
-    { name: "Domingo", Atual: 3490, Passada: 4300 },
-  ];
-
+export function Bars({ data }: { data: IGraphicsProps[] }) {
   return (
     <Container>
-      <TitleComponent text="VENDAS - SEMANA" />
+      <TitleComponent text="VENDAS (R$) - SEMANAIS" />
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={730}
@@ -45,11 +36,28 @@ export function Bars() {
             stroke="#cccccc34"
           />
           <XAxis dataKey="name" tickLine={false} interval={0} />
-          <YAxis tickLine={false} axisLine={false} />
-          <Tooltip cursor={{ fill: "transparent" }} />
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={(value) =>
+              new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(value)
+            }
+          />
+          <Tooltip
+            cursor={{ fill: "transparent" }}
+            formatter={(value) =>
+              new Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(value as number)
+            }
+          />
           <Legend />
-          <Bar dataKey="Atual" fill="#F00" />
-          <Bar dataKey="Passada" fill="#FFF" />
+          <Bar dataKey="Atual" fill="#F00" radius={[10, 10, 0, 0]} />
+          <Bar dataKey="Passada" fill="#FFF" radius={[10, 10, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </Container>

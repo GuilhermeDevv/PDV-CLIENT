@@ -12,7 +12,7 @@ export const Container = styled.div`
   gap: 1rem;
   width: calc(100% - 60px);
   height: 100%;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 60px;
   padding: 2.5rem;

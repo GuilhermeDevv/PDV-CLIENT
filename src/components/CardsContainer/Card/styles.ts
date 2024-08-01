@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import Link from "next/link";
 
-export const Container = styled.div`
+
+export const Container = styled(Link)`
   height: 150px;
   background-color: ${({ theme }) => theme.primary};
   border-radius: 2px;

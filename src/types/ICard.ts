@@ -1,5 +1,5 @@
 export interface ICard {
   text: string;
-  Icon: React.ReactElement;
+  icon: string;
   quantity: number | string;
 }

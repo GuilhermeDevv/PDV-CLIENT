@@ -1,11 +1,12 @@
 "use client";
 
+import { HTMLAttributes } from "react";
 import { Title } from "./styles";
 
-interface ITitleProps {
+interface ITitleProps extends HTMLAttributes<HTMLHeadingElement> {
   text: string;
 }
 
-export function TitleComponent({ text }: ITitleProps) {
-  return <Title>{text}</Title>;
+export function TitleComponent({ text, ...rest }: ITitleProps) {
+  return <Title {...rest}>{text}</Title>;
 }

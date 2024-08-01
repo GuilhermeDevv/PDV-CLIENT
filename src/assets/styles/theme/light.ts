@@ -7,6 +7,7 @@ interface ITheme {
   icon: string;
   iconActive: string;
   BackgroundIconActive: string;
+  BackgroundInative: string;
 
   textSecundary: string;
   deleteColor: string;
@@ -23,6 +24,7 @@ const LightTheme: ITheme = {
   icon: "#fff",
   iconActive: "#f00",
   BackgroundIconActive: "#2d2c2c",
+  BackgroundInative: "#000000de",
 
   textSecundary: "#a0a0a0",
   deleteColor: "#ff4d4d",

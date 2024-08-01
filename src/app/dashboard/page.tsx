@@ -1,25 +1,30 @@
+"use client";
 import { Container, Main } from "../styles";
-
-import { Metadata } from "next";
 
 import { CardsContainer } from "@/components/CardsContainer";
 import { TitleComponent } from "@/components/Title";
-import { useDashboard } from "./hooks/useDashboard";
+import { useDashboard } from "@/utils/hooks/useDashboard";
 import { GraphicsContainer } from "@/components/GraphicsContainer";
+import { httpClientFactory } from "@/adapters";
 
-export const metadata: Metadata = {
-  title: "DASHBOARD - SANTOS CONSTRUÇÕES E REFORMAS - PDV",
-  description: "SANTOS CONSTRUÇÕES E REFORMAS - PDV",
-};
-
-export default function Home() {
-  const { data } = useDashboard();
+export default function Dashboard() {
+  const { data } = useDashboard({
+    client: httpClientFactory(),
+  });
   return (
     <Main>
       <Container>
         <TitleComponent text="DASHBOARD" />
-        <CardsContainer data={data} />
-        <GraphicsContainer />
+        {data && (
+          <>
+            <CardsContainer data={data?.quantityInfo} />
+            <GraphicsContainer
+              quantityInfo={data?.quantityInfo}
+              salesValue={data?.salesValue}
+              salesQuantity={data?.salesQuantity}
+            />
+          </>
+        )}
       </Container>
     </Main>
   );

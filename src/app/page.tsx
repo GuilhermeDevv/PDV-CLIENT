@@ -1,16 +1,17 @@
+"use client";
+
+import { Login } from "@/components/Login";
 import { Container, Main } from "./styles";
 
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "PDV",
-  description: "SANTOS CONSTRUÇÕES E REFORMAS - PDV",
-};
+import { useState } from "react";
+import { NotFound } from "@/components/NotFound";
 
 export default function Home() {
   return (
     <Main>
-      <Container>t</Container>
+      <Container>
+        <NotFound text="Em desenvolvimento !" />
+      </Container>
     </Main>
   );
 }

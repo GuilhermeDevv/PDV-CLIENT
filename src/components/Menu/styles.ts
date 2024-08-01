@@ -6,6 +6,7 @@ export const Container = styled.menu`
   z-index: 1000;
   width: 100%;
   max-width: 60px;
+  overflow-x: hidden;
   height: 100vh;
   position: fixed;
   background-color: ${({ theme }) => theme.primary};

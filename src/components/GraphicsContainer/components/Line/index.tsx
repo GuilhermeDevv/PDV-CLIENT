@@ -13,21 +13,12 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { IGraphicsProps } from "@/types/IDashboard";
 
-export function Line() {
-  const data = [
-    { name: "Segunda", Atual: 4000, Passada: 2400 },
-    { name: "Terça", Atual: 3000, Passada: 1398 },
-    { name: "Quarta", Atual: 2000, Passada: 9800 },
-    { name: "Quinta", Atual: 2780, Passada: 3908 },
-    { name: "Sexta", Atual: 1890, Passada: 4800 },
-    { name: "Sábado", Atual: 2390, Passada: 3800 },
-    { name: "Domingo", Atual: 3490, Passada: 4300 },
-  ];
-
+export function Line({ data }: { data: IGraphicsProps[] }) {
   return (
     <Container>
-      <TitleComponent text="CLIENTES  - SEMANA" />
+      <TitleComponent text="VENDAS - SEMANAIS" />
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={730}

@@ -34,24 +34,30 @@ export function Menu() {
             <HomeIcon />
             <span>DASHBOARD</span>
           </Link>
-          <Link href="/" className={getActiveLink("/box") ? "active" : ""}>
+          <Link href="/box" className={getActiveLink("/box") ? "active" : ""}>
             <PointOfSaleIcon />
             <span>CAIXA</span>
           </Link>
-          <Link href="/" className={getActiveLink("/sales") ? "active" : ""}>
+          <Link
+            href="/sales"
+            className={getActiveLink("/sales") ? "active" : ""}
+          >
             <MonetizationOnIcon />
             <span>VENDAS</span>
           </Link>
-          <Link href="/" className={getActiveLink("/products") ? "active" : ""}>
+          <Link
+            href="/products"
+            className={getActiveLink("/products") ? "active" : ""}
+          >
             <ShoppingCartIcon />
             <span>PRODUTOS</span>
           </Link>
           <Link
-            href="/"
-            className={getActiveLink("/management") ? "active" : ""}
+            href="/stock"
+            className={getActiveLink("/stock") ? "active" : ""}
           >
             <InventoryIcon />
-            <span>ESTOQUE</span>
+            <span>REPOSIÇÃO</span>
           </Link>
 
           <Link
