@@ -1,12 +1,11 @@
 "use client";
 
 import StyledComponentsRegistry from "@/lib/registry";
-import { Title } from "@/components/Title";
+
 import GlobalStyle from "@/assets/styles";
 import { ThemeProvider } from "styled-components";
+import { Menu } from "@/components/Menu";
 import light from "@/assets/styles/theme/light";
-
-
 
 export default function RootLayout({
   children,
@@ -18,7 +17,7 @@ export default function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <ThemeProvider theme={light}>
-            <Title />
+            <Menu />
             {children}
             <GlobalStyle />
           </ThemeProvider>
