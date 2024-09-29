@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.aside`
   position: fixed;
@@ -13,7 +13,7 @@ export const Container = styled.aside`
 `;
 
 export const Content = styled.form`
-  width: 500px;
+  width: 70%;
   height: fit-content;
   background-color: ${({ theme }) => theme.primary};
   border-radius: 4px;
@@ -23,6 +23,8 @@ export const Content = styled.form`
   padding: 20px;
   align-items: center;
   position: relative;
+
+  max-height: 90%;
   & > span {
     display: block;
     position: absolute;
@@ -51,7 +53,7 @@ export const Content = styled.form`
     color: ${({ theme }) => theme.icon};
   }
 
-  & input {
+  & input[aria-label='Nome do cliente'] {
     width: 90%;
     height: 40px;
     border: 1px solid ${({ theme }) => theme.text};
@@ -90,6 +92,7 @@ export const Content = styled.form`
       background-color: ${({ theme }) => theme.background};
       color: ${({ theme }) => theme.iconActive};
     }
+    user-select: none;
   }
 `;
 
@@ -231,4 +234,67 @@ export const Delete = styled.div`
       color: ${({ theme }) => theme.iconActive};
     }
   }
+`;
+export const ContainerProducts = styled.div`
+  max-height: 300px;
+  overflow-y: auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: ${({ theme }) => theme.background};
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.iconActive};
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.background};
+  }
+`;
+
+export const ContentProducts = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+`;
+
+export const InputQuantity = styled.input`
+  width: 50px;
+  height: 40px;
+  border: 1px solid ${({ theme }) => theme.icon};
+  border-radius: 4px;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  color: ${({ theme }) => theme.textSecundary};
+  outline: none;
+  background-color: ${({ theme }) => theme.BackgroundInative};
+`;
+
+export const Add = styled.div`
+  width: 90%;
+  height: 40px;
+  background-color: ${({ theme }) => theme.BackgroundInative};
+  color: ${({ theme }) => theme.textSecundary};
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.iconActive};
+  }
+  user-select: none;
 `;

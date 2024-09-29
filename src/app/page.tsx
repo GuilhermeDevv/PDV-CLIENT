@@ -1,17 +1,12 @@
-"use client";
+'use client';
 
-import { Login } from "@/components/Login";
-import { Container, Main } from "./styles";
-
-import { useState } from "react";
-import { NotFound } from "@/components/NotFound";
+import { Login } from '@/components/Login';
+import { Main } from './styles';
 
 export default function Home() {
   return (
     <Main>
-      <Container>
-        <NotFound text="Em desenvolvimento !" />
-      </Container>
+      <Login />
     </Main>
   );
 }

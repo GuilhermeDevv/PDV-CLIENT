@@ -1,0 +1,214 @@
+.Container {
+  background: #000;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  inset: 0;
+  z-index: 999;
+}
+
+/* XBOX */
+.LogoXbox {
+  max-width: 220px;
+  max-height: 220px;
+  fill: transparent;
+  position: absolute;
+  animation: toLeftScreen 3s linear 5s forwards,
+    boxShadowAnimate 4s linear infinite alternate;
+  transform: translate(-50%, -50%);
+  transform: scale(1);
+  padding: 20px;
+  border-radius: 100%;
+}
+.LogoXbox path {
+  /* REMOVE A COR DE FUNDO */
+  fill: transparent;
+  /* o comprimento dos traços visíveis e o comprimento dos espaços entre os traços */
+  stroke-dasharray: 140 540;
+  /* largura da borda */
+  stroke-width: 3px;
+  /* cor da borda */
+  stroke: white;
+  animation: borderComplete 2s linear forwards,
+    colorComplete 1s linear 2.5s forwards;
+  /* efeito de sombra  e dentro */
+  filter: drop-shadow(0 0 8px white);
+}
+/* ANIMAÇÃO DA BORDA PARECENDO QUE ESTA CORRENDO */
+@keyframes borderComplete {
+  0% {
+    stroke-dasharray: 0 680;
+  }
+  100% {
+    stroke-dasharray: 680 0;
+  }
+}
+@keyframes colorComplete {
+  0% {
+    fill: transparent;
+  }
+  100% {
+    fill: white;
+  }
+}
+@keyframes boxShadowAnimate {
+  from {
+    box-shadow: inset 0px 2px 1px transparent;
+  }
+  to {
+    box-shadow: inset 0px -4px 1px white;
+  }
+}
+
+/* SANTOS CONSTRUÇÕES */
+.LogoSantos {
+  fill: transparent;
+  padding: 20px;
+  width: 800px;
+  animation: ExitScreen 1s linear 6s forwards;
+  transform: scale(1);
+}
+.LogoSantos path {
+  fill: transparent;
+  stroke: white;
+}
+.LogoSantos #Casa1 {
+  animation: borderComplete 3s linear forwards, Casa1 0.5s linear 3s forwards,
+    ScaleAndTranslate 1s linear 2s forwards;
+}
+.LogoSantos #Casa2 {
+  animation: borderComplete 3s linear forwards, Casa2 0.5s linear 3s forwards,
+    ScaleAndTranslate 1s linear 2s forwards;
+}
+
+.LogoSantos #Janela path {
+  animation: borderComplete 13s linear forwards, Janela 1s linear 3s forwards,
+    ScaleAndTranslate 1s linear 2s forwards;
+}
+
+.LogoSantos #Letra {
+  fill: transparent;
+  animation: borderComplete 2s linear forwards, Letra 1s linear 3s forwards,
+    OpacityText 1s linear 2s forwards;
+  opacity: 0;
+}
+
+.LogoSantos #LetraO {
+  animation: borderComplete 2s linear forwards, LetraO 1s linear 3s forwards,
+    OpacityText 1s linear 2s forwards;
+  opacity: 0;
+}
+.LogoSantos #LetraOintern {
+  stroke: black;
+  fill: inherit;
+  animation: borderComplete 2s linear forwards,
+    LetraOIntern 1s linear 2s forwards, OpacityText 1s linear 2s forwards;
+  opacity: 0;
+}
+
+.LogoSantos .TextSantos {
+  opacity: 0;
+  animation: OpacityText 1s linear 2s forwards;
+}
+
+@keyframes Casa1 {
+  0% {
+    fill: transparent;
+  }
+  100% {
+    fill: #fff;
+    stroke: white;
+  }
+}
+@keyframes Casa2 {
+  0% {
+    fill: transparent;
+  }
+  100% {
+    fill: #ff0000;
+    stroke: #ff0000;
+  }
+}
+@keyframes Letra {
+  0% {
+    fill: transparent;
+  }
+  100% {
+    fill: white;
+    stroke: white;
+  }
+}
+@keyframes LetraO {
+  0% {
+    fill: transparent;
+  }
+  100% {
+    fill: white;
+    stroke: white;
+  }
+}
+@keyframes LetraOIntern {
+  0% {
+    fill: #000;
+    stroke: black;
+  }
+  100% {
+    fill: #000;
+    stroke: white;
+  }
+}
+@keyframes Janela {
+  0% {
+    fill: inherit;
+  }
+  100% {
+    fill: #ff0000;
+    stroke: #ff0000;
+  }
+}
+@keyframes OpacityText {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes ExitScreen {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+/* WAVES */
+
+.Waves {
+  width: 100%;
+  height: 100%;
+}
+.Waves path {
+  width: 100vw;
+
+  animation: waves 4s linear infinite;
+}
+
+@keyframes waves {
+  0% {
+    d: path("M541 1041C1416.09 1078.65 1912.72 1078.72 2809.5 1041");
+  }
+  50% {
+    d: path("M541 1041C1410.79 530.277 1907.26 523.27 2809.5 1041");
+  }
+  75% {
+    d: path("M541 1041C1410.81 1566.46 1907.23 1575.75 2809.5 1041");
+  }
+  100% {
+    d: path("M541 1041C1416.09 1078.65 1912.72 1078.72 2809.5 1041");
+  }
+}

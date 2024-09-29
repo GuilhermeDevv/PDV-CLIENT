@@ -1,5 +1,5 @@
-import { TitleComponent } from "@/components/Title";
-import { Container } from "./styles";
+import { TitleComponent } from '@/components/Title';
+import { Container } from './styles';
 
 import {
   Bar,
@@ -10,13 +10,19 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from "recharts";
-import { IGraphicsProps } from "@/types/IDashboard";
-
-export function Bars({ data }: { data: IGraphicsProps[] }) {
+} from 'recharts';
+import { IGraphicsProps } from '@/types/IDashboard';
+import { CustomTooltipContent } from './components';
+export function Bars({
+  data,
+  title,
+}: {
+  data: IGraphicsProps[];
+  title?: string;
+}) {
   return (
     <Container>
-      <TitleComponent text="VENDAS (R$) - SEMANAIS" />
+      <TitleComponent text={title ?? 'VENDAS (R$) - SEMANAIS'} />
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={730}
@@ -39,21 +45,16 @@ export function Bars({ data }: { data: IGraphicsProps[] }) {
           <YAxis
             tickLine={false}
             axisLine={false}
-            tickFormatter={(value) =>
-              new Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
+            tickFormatter={value =>
+              new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
               }).format(value)
             }
           />
           <Tooltip
-            cursor={{ fill: "transparent" }}
-            formatter={(value) =>
-              new Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-              }).format(value as number)
-            }
+            cursor={{ fill: 'transparent' }}
+            content={<CustomTooltipContent />}
           />
           <Legend />
           <Bar dataKey="Atual" fill="#F00" radius={[10, 10, 0, 0]} />

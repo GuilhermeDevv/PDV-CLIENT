@@ -4,22 +4,24 @@ import {
   Content,
   Hr,
   Link,
+  Logout,
   Navigation,
-} from "./styles";
+} from './styles';
 
-import SettingsIcon from "@mui/icons-material/Settings";
-import PersonIcon from "@mui/icons-material/Person";
-import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import HomeIcon from "@mui/icons-material/Home";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
+import SettingsIcon from '@mui/icons-material/Settings';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import HomeIcon from '@mui/icons-material/Home';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 
-import { useMenu } from "./hooks";
+import { useMenu } from './hooks';
 
 export function Menu() {
-  const { getActiveLink, Logo } = useMenu();
+  const { getActiveLink, Logo, logout } = useMenu();
 
   return (
     <Container>
@@ -29,32 +31,32 @@ export function Menu() {
           <Hr />
           <Link
             href="/dashboard"
-            className={getActiveLink("/dashboard") ? "active" : ""}
+            className={getActiveLink('/dashboard') ? 'active' : ''}
           >
             <HomeIcon />
             <span>DASHBOARD</span>
           </Link>
-          <Link href="/box" className={getActiveLink("/box") ? "active" : ""}>
+          <Link href="/box" className={getActiveLink('/box') ? 'active' : ''}>
             <PointOfSaleIcon />
             <span>CAIXA</span>
           </Link>
           <Link
             href="/sales"
-            className={getActiveLink("/sales") ? "active" : ""}
+            className={getActiveLink('/sales') ? 'active' : ''}
           >
             <MonetizationOnIcon />
             <span>VENDAS</span>
           </Link>
           <Link
             href="/products"
-            className={getActiveLink("/products") ? "active" : ""}
+            className={getActiveLink('/products') ? 'active' : ''}
           >
             <ShoppingCartIcon />
             <span>PRODUTOS</span>
           </Link>
           <Link
             href="/stock"
-            className={getActiveLink("/stock") ? "active" : ""}
+            className={getActiveLink('/stock') ? 'active' : ''}
           >
             <InventoryIcon />
             <span>REPOSIÇÃO</span>
@@ -62,7 +64,7 @@ export function Menu() {
 
           <Link
             href="/"
-            className={getActiveLink("/employees") ? "active" : ""}
+            className={getActiveLink('/employees') ? 'active' : ''}
           >
             <SupervisorAccountIcon />
             <span>FUNCIONÁRIOS</span>
@@ -71,18 +73,23 @@ export function Menu() {
         <Configuration>
           <Link
             href="/settings"
-            className={getActiveLink("/settings") ? "active" : ""}
+            className={getActiveLink('/settings') ? 'active' : ''}
           >
             <SettingsIcon />
             <span>CONFIGURAÇÃO</span>
           </Link>
-          <Link
+
+          <Logout onClick={logout}>
+            <LogoutIcon />
+            <span>SAIR</span>
+          </Logout>
+          {/* <Link
             href="/account"
             className={getActiveLink("/account") ? "active" : ""}
           >
             <PersonIcon />
             <span>CONTA</span>
-          </Link>
+          </Link> */}
         </Configuration>
       </Content>
     </Container>

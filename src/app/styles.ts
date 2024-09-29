@@ -1,9 +1,32 @@
-"use client";
-import styled from "styled-components";
+'use client';
+import styled from 'styled-components';
 
 export const Main = styled.main`
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.iconActive};
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.primary};
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #555;
+  }
 `;
 
 export const Container = styled.div`

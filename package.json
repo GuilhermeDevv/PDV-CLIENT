@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "host": "next dev -H 192.168.1.10 -p 3001",
+    "host": "next dev -H 192.168.1.151 -p 3001",
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint"
@@ -19,6 +19,9 @@
     "@types/axios": "^0.14.0",
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",
+    "esc-pos-printer": "^1.0.11",
+    "escpos": "^3.0.0-alpha.6",
+    "escpos-usb": "^3.0.0-alpha.4",
     "next": "14.2.1",
     "numeral": "^2.0.6",
     "react": "^18",
@@ -32,6 +35,7 @@
     "zustand": "^4.5.4"
   },
   "devDependencies": {
+    "@types/escpos": "^2.5.5",
     "@types/node": "^20",
     "@types/numeral": "^2.0.5",
     "@types/react": "^18",

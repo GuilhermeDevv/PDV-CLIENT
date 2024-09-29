@@ -1,8 +1,8 @@
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from 'next/navigation';
 
 export function useMenu() {
   const pathname = usePathname();
-
+  const router = useRouter();
   function getActiveLink(url: string) {
     return url === pathname;
   }
@@ -135,5 +135,11 @@ export function useMenu() {
     );
   }
 
-  return { getActiveLink, Logo };
+  function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    router.push('/');
+  }
+
+  return { getActiveLink, Logo, logout };
 }

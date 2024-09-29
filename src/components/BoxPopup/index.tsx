@@ -1,9 +1,9 @@
-import { TailSpin } from "react-loading-icons";
-import { TitleComponent } from "../Title";
-import { useBoxPopUp } from "./hooks/useBoxPopup";
-import { Container, Content } from "./styles";
-import { IBoxComponentProps } from "./types";
-import CloseIcon from "@mui/icons-material/Close";
+import { TailSpin } from 'react-loading-icons';
+import { TitleComponent } from '../Title';
+import { useBoxPopUp } from './hooks/useBoxPopup';
+import { Container, Content } from './styles';
+import { IBoxComponentProps } from './types';
+import CloseIcon from '@mui/icons-material/Close';
 
 export function PopupComponent({
   open,
@@ -23,23 +23,24 @@ export function PopupComponent({
     handleChangeVisibilityPopup,
     fetchOpenBoxFn,
   });
+  const bigArray = new Array(1000000).fill('item');
 
   return (
     <Container $open={open}>
-      <Content onSubmit={handleSubmit((d) => handleSubmitBox(d))}>
+      <Content onSubmit={handleSubmit(d => handleSubmitBox(d))}>
         <span>
           <CloseIcon onClick={() => setIsOpen(false)} />
         </span>
         <strong>QUANTO EM CAIXA ?</strong>
 
         <input
-          {...register("value")}
+          {...register('value')}
           type="text"
           placeholder="Digite o valor"
           onChange={formatValue}
         />
         <input
-          {...register("confirmValue")}
+          {...register('confirmValue')}
           type="text"
           placeholder="Confirme o valor"
           onChange={formatValue}
@@ -50,7 +51,7 @@ export function PopupComponent({
           {errors?.confirmValue?.message as string}
         </p>
         <button type="submit">
-          {isLoading ? <TailSpin height={30} /> : "ABRIR"}
+          {isLoading ? <TailSpin height={30} /> : 'ABRIR'}
         </button>
       </Content>
     </Container>

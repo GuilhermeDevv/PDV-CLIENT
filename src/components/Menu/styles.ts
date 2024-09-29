@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import LinkNext from "next/link";
-import ImageNext from "next/image";
+import styled from 'styled-components';
+import LinkNext from 'next/link';
+import ImageNext from 'next/image';
 
 export const Container = styled.menu`
   z-index: 1000;
@@ -50,6 +50,34 @@ export const Hr = styled.hr`
 `;
 
 export const Link = styled(LinkNext)`
+  display: flex;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  align-items: center;
+  background-color: ${({ theme }) => theme.BackgroundIconActive};
+  border-radius: 4px;
+  width: 100%;
+  z-index: 1;
+  & svg {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 28px;
+  }
+  & svg path {
+    font-size: 40px;
+    color: ${({ theme }) => theme.icon};
+  }
+  & span {
+    color: ${({ theme }) => theme.textSecundary};
+    font-size: 12px;
+    font-weight: 500;
+    display: none;
+  }
+`;
+
+export const Logout = styled.div`
   display: flex;
   padding: 0.5rem;
   gap: 0.5rem;

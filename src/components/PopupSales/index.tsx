@@ -1,26 +1,30 @@
-import * as z from "zod";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
+  Add,
   Container,
+  ContainerProducts,
   Content,
+  ContentProducts,
   Delete,
+  InputQuantity,
   Options,
   OptionsSelected,
-  Select,
-} from "./styles";
-import CloseIcon from "@mui/icons-material/Close";
-import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
-import { StylesConfig } from "react-select";
-import { TailSpin } from "react-loading-icons";
-import { ITable } from "@/types/ITable";
-import { useState } from "react";
-import { formatCurrency } from "@/utils/formatCurrencyBR";
-import { ISelect } from "@/types";
-import { ISale } from "@/types";
-import { IProductReactSelect } from "@/types/IProduct";
+} from './styles';
+import CloseIcon from '@mui/icons-material/Close';
+import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
 
-interface IPopupSalesProps {
+import { TailSpin } from 'react-loading-icons';
+import { ITable } from '@/types/ITable';
+
+import { formatCurrency } from '@/utils/formatCurrencyBR';
+
+import { ISale } from '@/types';
+import { IProductReactSelect } from '@/types/IProduct';
+import { usePopupSales } from './hooks/usePopupSales';
+
+import { SelectComponent } from '../Select';
+import { useState } from 'react';
+
+export interface IPopupSalesProps {
   setIsOpen: (value: boolean) => void;
   sales: ITable[] | null;
   productOptions: IProductReactSelect[];
@@ -35,96 +39,25 @@ export function PopupSales({
   handleSales,
   isLoading,
 }: IPopupSalesProps) {
-  const [totalValue, setTotalValue] = useState(0);
-  const [options] = useState(() =>
-    productOptions?.map((product) => ({
-      ...product,
-    }))
-  );
-  const [optionsSearch, setOptionsSearch] = useState("");
-  const [optionsSelected, setOptionsSelected] = useState<
-    | {
-        value: string;
-        label: string;
-        price: number;
-        id: string;
-      }[]
-    | []
-  >([]);
-
-  const schema = z.object({
-    id_venda: z.string().optional(),
-    nome_cliente: z.string().nonempty("Nome do cliente é obrigatório"),
-  });
-
-  function onChangeSelectProduct(option: any) {
-    setOptionsSelected((prev) =>
-      prev
-        ? [
-            ...prev,
-            {
-              ...option,
-              id: `${option.value}-${new Date().getTime()}`,
-            },
-          ]
-        : [
-            {
-              ...option,
-              id: `${option.value}-${new Date().getTime()}`,
-            },
-          ]
-    );
-
-    console.log(optionsSelected);
-
-    setTotalValue(
-      parseFloat(
-        (
-          optionsSelected.reduce(
-            (acc, cur) => acc + parseFloat(cur.price.toFixed(2)),
-            0
-          ) + parseFloat(option.price.toFixed(2))
-        ).toFixed(2)
-      )
-    );
-  }
-
-  function onSubmit(obj: any) {
-    const data: typeof schema._type = obj;
-    handleSales({
-      ...data,
-      total: totalValue.toString(),
-      id_produtos: optionsSelected.map((i) => i.value),
-    } as ISale);
-  }
-
-  function handleDeleteProduct(id: string | null) {
-    if (!id) return;
-    setOptionsSelected((prev) => prev?.filter((p) => p.id !== id) || []);
-    setTotalValue(
-      optionsSelected.reduce((acc, cur) => acc + cur.price, 0) -
-        optionsSelected.find((p) => p.id === id)?.price!
-    );
-  }
-
-  function handleSearchProduct(value: string) {
-    setOptionsSearch(value);
-  }
-
-  
-
   const {
     register,
     handleSubmit,
-    setValue,
-    control,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(schema),
-  });
+    optionsSelected,
+    totalValue,
+    onSubmit,
+    handleDeleteProduct,
+    handleQuantityChange,
+    handleSelectChange,
+    handleKeyDown,
+    handleKeyDownSelect,
+    addNewProduct,
+    containerRef,
+    quantityRefs,
+    selectRefs,
+  } = usePopupSales({ productOptions, handleSales });
 
   return (
-    <Container onSubmit={handleSubmit(onSubmit)}>
+    <Container>
       <Content>
         <span>
           <CloseIcon onClick={() => setIsOpen(false)} />
@@ -133,71 +66,57 @@ export function PopupSales({
 
         <input
           type="text"
+          aria-label="Nome do cliente"
           placeholder="Nome do cliente"
-          {...register("nome_cliente")}
+          {...register('nome_cliente')}
         />
 
-        
+        <ContainerProducts ref={containerRef}>
+          {optionsSelected.map((entry, index) => (
+            <ContentProducts key={index}>
+              <SelectComponent
+                id={`select-${entry.id}`}
+                options={productOptions}
+                value={entry.option}
+                onChange={option => handleSelectChange(option as any, entry)}
+                onKeyDown={e => handleKeyDownSelect(e, entry.id)}
+                ref={el => {
+                  selectRefs.current.set(+entry.id, el);
+                }}
+              />
+              <InputQuantity
+                type="text"
+                ref={el => {
+                  quantityRefs.current.set(+entry.id, el);
+                }}
+                value={entry.quantity}
+                onChange={e => handleQuantityChange(e, entry)}
+                onKeyDown={e => handleKeyDown(e, entry, index)}
+              />
 
-        <Select>
-          <OptionsSelected>
-            {optionsSelected?.length > 0 &&
-              optionsSelected?.map((option, index) => (
-                <div key={option.label.concat(option.value, index.toString())}>
-                  <span>{option.label}</span>
-                  <Delete onClick={() => handleDeleteProduct(option.id)}>
-                    <DeleteSharpIcon />
-                  </Delete>
-                </div>
-              ))}
-
-            <input
-              type="text"
-              placeholder={
-                optionsSelected?.length === 0 ? "Selecione um produto" : ""
-              }
-              onChange={(e) => handleSearchProduct(e.target.value)}
-            />
-          </OptionsSelected>
-
-          <Options onMouseDown={(e) => e.preventDefault()}>
-            {(optionsSearch
-              ? options.filter((option) =>
-                  option.label
-                    .toLowerCase()
-                    .includes(optionsSearch.toLowerCase())
-                )
-              : options
-            ).map((option: IProductReactSelect) => (
-              <div
-                key={option.label.concat(option.value)}
-                onClick={() => onChangeSelectProduct(option)}
+              <strong
+                style={{
+                  textWrap: 'nowrap',
+                }}
               >
-                <span>{option.label}</span>
-                <span>
-                  {" "}
-                  ({" "}
-                  {optionsSelected
-                    ? optionsSelected.filter((i) => i.value === option.value)
-                        .length
-                    : 0}{" "}
-                  )
-                </span>
-              </div>
-            ))}
-          </Options>
-        </Select>
-
+                {formatCurrency(entry.option.price.toString())} x{' '}
+                {entry.quantity} ={' '}
+                {formatCurrency(
+                  (entry.option.price * entry.quantity).toString()
+                )}
+              </strong>
+              <Delete onClick={() => handleDeleteProduct(entry.id)}>
+                <DeleteSharpIcon />
+              </Delete>
+            </ContentProducts>
+          ))}
+        </ContainerProducts>
         <strong>Total: {formatCurrency(totalValue.toString())}</strong>
 
-        <button type="submit">
-          {isLoading ? (
-            <TailSpin height={30} />
-          ) : false ? (
-            "EDITAR"
-          ) : (
-            "ADICIONAR"
-          )}
+        <Add onClick={() => addNewProduct()}>ADICIONAR PRODUTO</Add>
+        <button onClick={handleSubmit(onSubmit)}>
+          {isLoading && <TailSpin height={30} />}
+          {!isLoading && 'FINALIZAR'}
         </button>
       </Content>
     </Container>

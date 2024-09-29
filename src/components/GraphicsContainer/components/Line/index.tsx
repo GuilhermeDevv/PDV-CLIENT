@@ -1,24 +1,23 @@
-import { TitleComponent } from "@/components/Title";
-import { Container } from "./styles";
+import { TitleComponent } from '@/components/Title';
+import { Container } from './styles';
 
 import {
   Area,
   AreaChart,
-  Bar,
-  BarChart,
   CartesianGrid,
   Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
-} from "recharts";
-import { IGraphicsProps } from "@/types/IDashboard";
+} from 'recharts';
+import { IGraphicsProps } from '@/types/IDashboard';
+import { CustomTooltipContent } from './components';
 
 export function Line({ data }: { data: IGraphicsProps[] }) {
   return (
     <Container>
-      <TitleComponent text="VENDAS - SEMANAIS" />
+      <TitleComponent text="VENDAS - SEMANAL" />
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={730}
@@ -49,7 +48,10 @@ export function Line({ data }: { data: IGraphicsProps[] }) {
             stroke="#cccccc34"
           />
           <Legend iconType="plainline" />
-          <Tooltip cursor={false} />
+          <Tooltip
+            cursor={{ fill: 'transparent' }}
+            content={<CustomTooltipContent />}
+          />
           <Area
             type="monotone"
             dataKey="Atual"

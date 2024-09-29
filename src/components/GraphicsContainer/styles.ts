@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.section`
   width: 100%;
@@ -9,10 +9,6 @@ export const Content = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   gap: 2rem;
-  @media (min-width: 1367px) {
-    & {
-      flex-direction: column;
-    }
-  }
 `;

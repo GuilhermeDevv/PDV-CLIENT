@@ -1,13 +1,13 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState } from 'react';
 
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   formatCurrency,
   formatCurrencyOnChange,
   unformatCurrency,
-} from "@/utils/formatCurrencyBR";
+} from '@/utils/formatCurrencyBR';
 
 interface IBoxPopUp {
   handleChangeVisibilityPopup: (v?: boolean) => void;
@@ -21,17 +21,17 @@ export function useBoxPopUp({
   const schema = z
     .object({
       value: z.string({
-        message: "Valor inválido",
-        required_error: "Campo obrigatório",
+        message: 'Valor inválido',
+        required_error: 'Campo obrigatório',
       }),
       confirmValue: z.string({
-        message: "Valor inválido",
-        required_error: "Campo obrigatório",
+        message: 'Valor inválido',
+        required_error: 'Campo obrigatório',
       }),
     })
-    .refine((data) => data.value == data.confirmValue, {
-      message: "Os valores não são iguais",
-      path: ["confirmValue"],
+    .refine(data => data.value == data.confirmValue, {
+      message: 'Os valores não são iguais',
+      path: ['confirmValue'],
     });
 
   const {
