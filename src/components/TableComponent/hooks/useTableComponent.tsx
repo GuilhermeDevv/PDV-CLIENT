@@ -33,6 +33,7 @@ export function useTableComponent({
       produtos: string[];
     } | null
   ) => {
+    console.log(row, 'row');
     setSelectedRow(row);
     setOpen(true);
   };

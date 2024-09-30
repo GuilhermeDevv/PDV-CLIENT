@@ -68,6 +68,8 @@ export function PopupSales({
           type="text"
           aria-label="Nome do cliente"
           placeholder="Nome do cliente"
+          // AUTO FOCUS
+          autoFocus
           {...register('nome_cliente')}
         />
 

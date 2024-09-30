@@ -29,37 +29,45 @@ export function TableComponent({
   });
   const handlePrint = () => {
     const printContent = `
-      <h3>Ferreira's Construção</h3>
-      <h6>Cliente: ${(selectedRow as any)?.cliente}</h6>
-      <h6>Vendedor: ${(selectedRow as any)?.funcionario}</h6>
-      <hr/>
-      <h6>Descrição / QTD</h6>
-      <hr/>
-      <ul style="list-style-type: none; padding: 0;">
-        ${(selectedRow as any)?.produtos
-          ?.map((produto: any) => `<li>${produto}</li>`)
-          .join('')}
-      </ul>
-      <hr/>
-      <h4>Total: R$ ${(selectedRow as any)?.total}</h4>
-    `;
+    <html>
+      <head>
+        <title>Imprimir</title>
+        <style>
+          body { font-family: Arial, sans-serif; background-color: #f4f4f4; }
+          h3, h4, h6 { margin: 0; padding: 0; }
+          h4 { margin-bottom: 10px; font-size: 14px; }
+          h6 { margin-bottom: 5px; }
+          hr { margin: 10px 0; }
+          ul { list-style-type: none; padding: 0; }
+          li { margin: 5px 0; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <h4>Ferreira's Construção</h4>
+        <h6>Cliente: ${(selectedRow as any)?.cliente}</h6>
+        <h6>Vendedor: ${(selectedRow as any)?.funcionario}</h6>
+        <hr/>
+        <hr/>
+        <h6>Qtd x Unit / Descrição - Total</h6>
+        <hr/>
+        <hr/>
+        <ul>
+          ${(selectedRow as any)?.produtos
+            ?.map((produto: any) => {
+              const [descricao, resto] = produto.split('(');
+              return `<li>${descricao.trim()}<br/>(${resto}`;
+            })
+            .join('')}
+        </ul>
+        <hr/>
+        <hr/>
+        <h4>Total a Pagar: ${(selectedRow as any)?.total}</h4>
+      </body>
+    </html>
+  `;
     const printWindow = window.open('', '', 'height=400,width=600');
     printWindow?.document.write(`
-      <html>
-        <head>
-          <title>Imprimir</title>
-          <style>
-            body { font-family: Arial, sans-serif, background-color: red; }
-            h2, h4, h6 { margin: 0; padding: 0; }
-            div { margin: 10px 0; }
-            ul { list-style-type: none; padding: 0; }
-            li { margin: 5px 0; }
-          </style>
-        </head>
-        <body>
           ${printContent}
-        </body>
-      </html>
     `);
     printWindow?.document.close();
     printWindow?.focus();

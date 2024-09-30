@@ -54,6 +54,21 @@ export function usePopupSales({ productOptions, handleSales }: IUsePopupSales) {
     }
   }, [optionsSelected, optionsSelected.length]);
 
+  useEffect(() => {
+    // se apertar o F2, FINALIZA A VENDA
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'F2') {
+        handleSubmit(onSubmit)();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [optionsSelected]);
+
   function onChangeSelectProduct(option: optionSelected) {
     const newOptionsSelected = optionsSelected.map(o =>
       o.id === option.id ? { ...option } : o

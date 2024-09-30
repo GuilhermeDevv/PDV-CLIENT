@@ -84,7 +84,13 @@ export function useSales({ client, formatDate }: IUseSalesProps) {
           format: 'DD/MM/YYYY HH:mm:ss',
         }),
         produtos: sale.produtos.map(
-          (product: any) => `${product.produto.nome} (${product.quantidade})`
+          (product: any) =>
+            `${product.produto.nome} (${product.quantidade}x  ${formatCurrency(
+              product.produto.preco
+            )})  - ${formatCurrency(
+              (product.quantidade * product.produto.preco).toString()
+            )}
+          `
         ),
       }));
 
