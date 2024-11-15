@@ -1,31 +1,47 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import StyledComponentsRegistry from '@/lib/registry';
+// NATIVE
+import React, { useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Titillium_Web } from 'next/font/google';
+
+// COMPONENTS
+import { Menu } from '@/components/Menu';
+import { MenuLoading } from '@/components/MenuLoading';
+// ASSETS
 import GlobalStyle from '@/assets/styles';
 
-import { ThemeProvider } from 'styled-components';
-import { Menu } from '@/components/Menu';
-import light from '@/assets/styles/theme/light';
-import { usePathname, useRouter } from 'next/navigation';
+// LIBS
 import { authenticateUser } from '@/lib/auth';
+
+// ADPTERS
 import { httpClientFactory } from '@/adapters';
-import { create } from 'zustand';
+
+// STORE
 import { useStore, useStoreIsAuthenticated } from '@/lib/store';
 
-interface StoreState {
-  isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
-}
+// PROVIDERS
+import { StyledComponentsProvider, TanstackProvider } from '@/providers';
+
+// FONTS
+const titillium_Web = Titillium_Web({
+  weight: ['200', '300', '400', '600', '700', '900'],
+  display: 'optional',
+  preload: true,
+  style: ['normal', 'italic'],
+  subsets: ['latin-ext'],
+});
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const client = httpClientFactory();
   const pathname = usePathname();
   const router = useRouter();
-  const setIsLoading = useStore(state => state.setIsLoading);
+
+  const { setIsLoading } = useStore(state => state);
   const { isAuthenticated, setIsAuthenticated } = useStoreIsAuthenticated(
     state => state
   );
@@ -33,33 +49,26 @@ export default function RootLayout({
   useEffect(() => {
     setIsLoading(true);
     async function authenticate() {
-      const client = httpClientFactory();
       const authenticated = await authenticateUser({ client });
-      if (!authenticated) {
-        setIsLoading(false);
-        router.push('/');
-      } else {
-        setIsAuthenticated(true);
-        setIsLoading(false);
-        if (pathname === '/') {
-          router.push('/dashboard');
-        }
-      }
+      setIsLoading(false);
+      if (!authenticated) return router.push('/');
+      setIsAuthenticated(true);
+      if (pathname === '/') router.push('/dashboard');
     }
-
     authenticate();
   }, [pathname]);
 
   return (
     <html lang="pt-br">
-      <body>
-        <StyledComponentsRegistry>
-          <ThemeProvider theme={light}>
-            {isAuthenticated && pathname !== '/' && <Menu />}
+      <body className={titillium_Web.className}>
+        <TanstackProvider>
+          <StyledComponentsProvider>
+            {isAuthenticated && pathname !== '/' && <Menu client={client} />}
+            {!isAuthenticated && pathname !== '/' && <MenuLoading />}
             {children}
             <GlobalStyle />
-          </ThemeProvider>
-        </StyledComponentsRegistry>
+          </StyledComponentsProvider>
+        </TanstackProvider>
       </body>
     </html>
   );

@@ -42,7 +42,7 @@ export default function Products() {
             onChange={e => handleFilterTable(e.target.value)}
           />
         </ContainerActions>
-        {table || tableFiltered ? (
+        {/* {table || tableFiltered ? (
           <TableComponent
             table={tableFiltered ?? table ?? []}
             setProductEdit={product => setProductEdit(product)}
@@ -50,11 +50,11 @@ export default function Products() {
             isOnline
             handleChangeStatus={fetchChangeStatus}
           />
-        ) : null}
+        ) : null} */}
 
-        {table && table.length === 0 && (
+        {/* {table && table.length === 0 && (
           <NotFound text="Nenhum produto encontrado !" />
-        )}
+        )} */}
 
         {isOpen && (
           <PopupProductsComponent

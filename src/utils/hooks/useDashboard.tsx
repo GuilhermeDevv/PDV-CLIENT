@@ -3,21 +3,16 @@ import { ICard } from '@/types';
 import { IHttpClient } from '@/types/httpClient';
 import { useEffect, useState } from 'react';
 import { IData } from '@/types/IDashboard';
-import { useStoreIsAuthenticated } from '@/lib/store';
+import { useStoreIsAuthenticated, useStoreToken } from '@/lib/store';
+import { useQueryClient, useQuery } from '@tanstack/react-query';
 export interface IuseDashboardProps {
   client: IHttpClient;
 }
 
 export function useDashboard({ client }: IuseDashboardProps) {
-  const [data, setData] = useState<IData | null>(null);
-  const timeAnimation = 7500;
-  const [isAnimation, setTimeAnimation] = useState(true);
-  const token = window.localStorage.getItem('token');
-  const { setIsAuthenticated } = useStoreIsAuthenticated(state => state);
+  const { token } = useStoreToken(state => state);
 
-  setTimeout(() => {
-    setTimeAnimation(false);
-  }, timeAnimation);
+  const { setIsAuthenticated } = useStoreIsAuthenticated(state => state);
 
   async function fetchData() {
     try {
@@ -28,16 +23,20 @@ export function useDashboard({ client }: IuseDashboardProps) {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      setData(response.data);
       setIsAuthenticated(true);
+      return response.data;
     } catch (err) {
       console.log(err);
     }
   }
-  useEffect(() => {
-    fetchData();
-  }, []);
 
-  return { data, isAnimation };
+  const { data } = useQuery({
+    queryKey: ['dashboard'],
+    queryFn: fetchData,
+    enabled: !!token,
+    staleTime: 1000 * 60 * 5, // 5 minutos
+    gcTime: 1000 * 60 * 10, // 10 minutos
+  });
+
+  return { data };
 }

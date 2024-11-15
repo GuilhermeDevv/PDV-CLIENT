@@ -3,57 +3,62 @@
 import { IData } from '@/types/IDashboard';
 import { Bars } from './components/Bars';
 import { Line } from './components/Line';
-import { Container, Content } from './styles';
+import { Container, Content, Top } from './styles';
 import { Skeleton } from '@mui/material';
+import { useTheme } from 'styled-components';
 
 export function GraphicsContainer({
   salesValue,
   salesQuantity,
   salesProfit,
 }: IData) {
+  const theme = useTheme();
   return (
     <Container>
       <Content>
-        {salesValue && <Bars data={salesValue} title="VENDAS (R$) - SEMANAL" />}
-        {salesProfit && (
-          <Bars data={salesProfit} title="LUCRO (R$) -  SEMANAL" />
-        )}
+        <Top>
+          {salesValue && <Bars data={salesValue} title="Vendas" />}
+          {salesProfit && <Bars data={salesProfit} title="Lucros" />}
+        </Top>
         {salesQuantity && <Line data={salesQuantity} />}
 
-        {!salesValue && (
-          <Skeleton
-            sx={{
-              borderRadius: 0.5,
-              backgroundColor: '#262626',
-            }}
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            height={300}
-          />
-        )}
-        {!salesQuantity && (
-          <Skeleton
-            sx={{
-              borderRadius: 0.5,
-              backgroundColor: '#262626',
-            }}
-            animation="wave"
-            variant="rectangular"
-            width={'100%'}
-            height={300}
-          />
-        )}
+        {/* LOADING! */}
+        <Top>
+          {!salesValue && (
+            <Skeleton
+              sx={{
+                borderRadius: '8px',
+                backgroundColor: theme.background,
+              }}
+              animation="wave"
+              variant="rectangular"
+              width={'100%'}
+              height={300}
+            />
+          )}
+          {!salesQuantity && (
+            <Skeleton
+              sx={{
+                borderRadius: '8px',
+                backgroundColor: theme.background,
+              }}
+              animation="wave"
+              variant="rectangular"
+              width={'100%'}
+              height={300}
+            />
+          )}
+        </Top>
         {!salesProfit && (
           <Skeleton
             sx={{
-              borderRadius: 0.5,
-              backgroundColor: '#262626',
+              borderRadius: '8px',
+              backgroundColor: theme.background,
             }}
             animation="wave"
             variant="rectangular"
             width={'100%'}
-            height={300}
+            height={400}
           />
         )}
       </Content>

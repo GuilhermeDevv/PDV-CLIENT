@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.aside`
   position: fixed;
@@ -13,7 +13,8 @@ export const Container = styled.aside`
 `;
 
 export const Content = styled.form`
-  width: 400px;
+  width: 80%;
+  width: 80%;
   height: fit-content;
   background-color: ${({ theme }) => theme.primary};
   border-radius: 4px;
@@ -92,16 +93,36 @@ export const Content = styled.form`
   }
 `;
 
+export const ContainerActions = styled.div`
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 0px;
+`;
+
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
-  width: 100%;
+  width: 50%;
   align-items: center;
   & > span {
     color: ${({ theme }) => theme.icon};
     font-weight: bold;
     align-self: flex-start;
-    margin-left: 16px;
+    margin-left: 5%;
+  }
+`;
+
+export const Horizontal = styled.div`
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  & > span {
+    color: ${({ theme }) => theme.icon};
+    font-weight: bold;
   }
 `;

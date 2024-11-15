@@ -36,7 +36,8 @@ export const Container = styled.div`
   width: calc(100% - 60px);
   height: 100%;
   position: relative;
-  top: 0;
+  top: 60px;
   left: 60px;
   padding: 2.5rem;
+  background-color: ${({ theme }) => theme.backgroundSecundary};
 `;

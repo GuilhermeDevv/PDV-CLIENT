@@ -5,24 +5,30 @@ import {
   Content,
   ContentProducts,
   Delete,
+  EditPrice,
+  InputPrice,
   InputQuantity,
   Options,
   OptionsSelected,
 } from './styles';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteSharpIcon from '@mui/icons-material/DeleteSharp';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 
 import { TailSpin } from 'react-loading-icons';
 import { ITable } from '@/types/ITable';
 
-import { formatCurrency } from '@/utils/formatCurrencyBR';
+import {
+  formatCurrency,
+  formatCurrencyOnChange,
+} from '@/utils/formatCurrencyBR';
 
 import { ISale } from '@/types';
 import { IProductReactSelect } from '@/types/IProduct';
 import { usePopupSales } from './hooks/usePopupSales';
 
 import { SelectComponent } from '../Select';
-import { useState } from 'react';
+import { memo } from 'react';
 
 export interface IPopupSalesProps {
   setIsOpen: (value: boolean) => void;
@@ -32,13 +38,13 @@ export interface IPopupSalesProps {
   isLoading: boolean;
 }
 
-export function PopupSales({
+const Component = ({
   setIsOpen,
   sales,
   productOptions,
   handleSales,
   isLoading,
-}: IPopupSalesProps) {
+}: IPopupSalesProps) => {
   const {
     register,
     handleSubmit,
@@ -54,11 +60,14 @@ export function PopupSales({
     containerRef,
     quantityRefs,
     selectRefs,
+    formRef,
+    onChangePriceProduct,
+    handleEditPriceProduct,
   } = usePopupSales({ productOptions, handleSales });
 
   return (
     <Container>
-      <Content>
+      <Content ref={formRef}>
         <span>
           <CloseIcon onClick={() => setIsOpen(false)} />
         </span>
@@ -77,7 +86,7 @@ export function PopupSales({
           {optionsSelected.map((entry, index) => (
             <ContentProducts key={index}>
               <SelectComponent
-                id={`select-${entry.id}`}
+                id={entry.id}
                 options={productOptions}
                 value={entry.option}
                 onChange={option => handleSelectChange(option as any, entry)}
@@ -86,6 +95,58 @@ export function PopupSales({
                   selectRefs.current.set(+entry.id, el);
                 }}
               />
+              {/*   <InputPrice
+                type="text"
+                aria-label="Valor do produto"
+                placeholder="Valor do produto"
+                {...register(`valor_${entry.id}`)}
+                value={
+                  formatCurrency(entry.option.price.toString()) === 'R$ 0,00'
+                    ? ''
+                    : formatCurrency(entry.option.price.toString())
+                }
+                onChange={e => {
+                  const value = e.target.value;
+                  if (value === '') {
+                    // Se o valor estiver vazio, define o valor original do produto
+                    onChangePriceProduct(
+                      entry.option.price.toString(),
+                      entry.id
+                    );
+                  } else {
+                    const formattedValue = formatCurrencyOnChange(value);
+                    onChangePriceProduct(formattedValue, entry.id);
+                  }
+                }}
+              /> */}
+
+              {entry.editCurrentPrice && (
+                <InputPrice
+                  type="text"
+                  aria-label="Valor do produto"
+                  placeholder="Valor do produto"
+                  {...register(`valor_${entry.id}`)}
+                  value={
+                    formatCurrency(entry.option.price.toString()) === 'R$ 0,00'
+                      ? ''
+                      : formatCurrency(entry.option.price.toString())
+                  }
+                  onChange={e => {
+                    const value = e.target.value;
+                    if (value === '') {
+                      // Se o valor estiver vazio, define o valor original do produto
+                      onChangePriceProduct(
+                        entry.option.price.toString(),
+                        entry.id
+                      );
+                    } else {
+                      const formattedValue = formatCurrencyOnChange(value);
+                      onChangePriceProduct(formattedValue, entry.id);
+                    }
+                  }}
+                />
+              )}
+
               <InputQuantity
                 type="text"
                 ref={el => {
@@ -107,9 +168,19 @@ export function PopupSales({
                   (entry.option.price * entry.quantity).toString()
                 )}
               </strong>
-              <Delete onClick={() => handleDeleteProduct(entry.id)}>
+              <Delete
+                onClick={() => handleDeleteProduct(entry.id)}
+                title="Remover produto"
+              >
                 <DeleteSharpIcon />
               </Delete>
+
+              <EditPrice
+                onClick={() => handleEditPriceProduct(entry.id)}
+                title="Editar preço"
+              >
+                <ModeEditOutlineIcon />
+              </EditPrice>
             </ContentProducts>
           ))}
         </ContainerProducts>
@@ -123,4 +194,6 @@ export function PopupSales({
       </Content>
     </Container>
   );
-}
+};
+
+export const PopupSales = memo(Component);

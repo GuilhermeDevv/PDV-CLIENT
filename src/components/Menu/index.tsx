@@ -1,11 +1,18 @@
 import {
   Configuration,
   Container,
-  Content,
   Hr,
+  InfoUser,
+  Left,
   Link,
   Logout,
   Navigation,
+  NotificationContainer,
+  RightTop,
+  Separator,
+  TitleComponent,
+  Top,
+  User,
 } from './styles';
 
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -14,27 +21,72 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InventoryIcon from '@mui/icons-material/Inventory';
-import HomeIcon from '@mui/icons-material/Home';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 import { useMenu } from './hooks';
+import { useTheme } from 'styled-components';
+import { useStoreNotification, useStoreUser } from '@/lib/store';
+import { AvatarComponent } from '../Avatar';
+import { IconCaretDown } from '@/assets/icons';
+import { UserProfile } from '../user-profile';
+import { IHttpClient } from '@/types/httpClient';
 
-export function Menu() {
-  const { getActiveLink, Logo, logout } = useMenu();
+export type MenuProps = {
+  client: IHttpClient;
+};
+
+export function Menu({ client }: MenuProps) {
+  const {
+    getActiveLink,
+    Logo,
+    logout,
+    IconSpeedometer,
+    toogleMenuUser,
+    isOpen,
+  } = useMenu(client);
+  const { user } = useStoreUser(state => state);
+  const { notification } = useStoreNotification(state => state);
 
   return (
     <Container>
-      <Content>
+      <Top>
+        <div />
+        <RightTop>
+          <NotificationContainer $qtdNotification={notification.length}>
+            <NotificationsIcon />
+          </NotificationContainer>
+
+          <Separator />
+          <User $isOpen={isOpen}>
+            <AvatarComponent />
+            <InfoUser>
+              <span>{user?.nome}</span>
+              <span>{user?.cargo}</span>
+            </InfoUser>
+            <div className="IconArrowUser" onClick={toogleMenuUser}>
+              <IconCaretDown />
+            </div>
+            <UserProfile isOpen={isOpen} />
+          </User>
+        </RightTop>
+      </Top>
+      <Left>
         <Navigation>
-          <Logo />
-          <Hr />
+          <Link href="/dashboard" className={'Ku'}>
+            <Logo />
+            <span>Ku</span>
+          </Link>
+
+          <TitleComponent>Menu</TitleComponent>
+
           <Link
             href="/dashboard"
             className={getActiveLink('/dashboard') ? 'active' : ''}
           >
-            <HomeIcon />
-            <span>DASHBOARD</span>
+            <IconSpeedometer />
+            <span>Dashboard</span>
           </Link>
           <Link href="/box" className={getActiveLink('/box') ? 'active' : ''}>
             <PointOfSaleIcon />
@@ -91,7 +143,7 @@ export function Menu() {
             <span>CONTA</span>
           </Link> */}
         </Configuration>
-      </Content>
+      </Left>
     </Container>
   );
 }

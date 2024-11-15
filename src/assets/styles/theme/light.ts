@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 interface ITheme {
   background: string;
@@ -7,34 +7,61 @@ interface ITheme {
   icon: string;
   iconActive: string;
   BackgroundIconActive: string;
-  BackgroundInative: string;
-
+  BackgroundIconInative: string;
+  backgroundActive: string;
+  backgroundInative: string;
+  backgroundSecundary: string;
+  shadow: string;
+  iconSecundary: string;
+  iconInative: string;
+  text: string;
   textSecundary: string;
-  deleteColor: string;
-  button: string;
-  buttonHover: string;
-  buttonActive: string;
-  buttonDisabled: string;
+  waveColor: string;
+  primaryBackground: string;
+  secondaryBackground: string;
+  tertiaryBackground: string;
+  quaternaryBackground: string;
+  quinaryBackground: string;
+  senaryBackground: string;
 }
-
+// #8541df,#6618c4,#c7a6e8,#fff,#a3a3a5
 const LightTheme: ITheme = {
-  background: "#000",
-  primary: "#262626",
-  secundary: "#fff",
-  icon: "#fff",
-  iconActive: "#f00",
-  BackgroundIconActive: "#2d2c2c",
-  BackgroundInative: "#000000de",
+  background: '#fff',
+  backgroundSecundary: '#f9f9f9',
 
-  textSecundary: "#a0a0a0",
-  deleteColor: "#ff4d4d",
-  button: "#0070f3",
-  buttonHover: "#0056b3",
-  buttonActive: "#004499",
-  buttonDisabled: "#b3b3b3",
+  backgroundActive: '#f6eeff',
+  backgroundInative: '#f9f9f9',
+
+  primary: '#fff',
+  secundary: '#fff',
+
+  icon: '#a3a3a5',
+  iconSecundary: '#000',
+
+  shadow: '#cccccc6e',
+
+  iconActive: '#6618c4',
+  iconInative: '#a3a3a5',
+
+  waveColor: '#c7a6e8',
+
+  BackgroundIconActive: '#fff',
+  BackgroundIconInative: '#000000de',
+
+  text: '#323232',
+  textSecundary: '#000',
+
+  // cores especiais
+
+  primaryBackground: '#6618c4',
+  secondaryBackground: '#5dcfff',
+  tertiaryBackground: '#e228af',
+  quaternaryBackground: '#ff9e00',
+  quinaryBackground: '#00d25b',
+  senaryBackground: '#ff5e5e',
 };
 
-declare module "styled-components" {
+declare module 'styled-components' {
   export interface DefaultTheme extends ITheme {}
 }
 

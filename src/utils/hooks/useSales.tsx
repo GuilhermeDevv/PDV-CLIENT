@@ -26,11 +26,13 @@ export function useSales({ client, formatDate }: IUseSalesProps) {
 
   async function handleSales(sale: ISale) {
     setIsLoading(true);
+    console.log(sale);
     const objSendRequest = {
       id_venda: null,
       nome_cliente: sale.nome_cliente,
       id_produtos: sale.id_produtos,
       total: sale.total,
+      valores: sale.valores,
     };
 
     try {

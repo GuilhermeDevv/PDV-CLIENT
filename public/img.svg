@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: #f9f9f9; display: block; z-index: 1; position: relative; shape-rendering: auto;" width="500" height="350" preserveAspectRatio="xMidYMid" viewBox="0 0 500 350">
+	<g transform="">
+		<linearGradient id="lg-0.6590519274487807" x1="0" x2="1" y1="0" y2="0">
+			<stop stop-color="#6618c4" offset="0">
+			</stop>
+			<stop stop-color="#c7a6e8" offset="1">
+			</stop>
+		</linearGradient>
+		<path d="M 0 0 L 0 294.762 Q 50 351.563 100 315.666 T 200 224.252 T 300 249.268 T 400 230.474 T 500 166.851 L 500 0 Z" fill="url(#lg-0.6590519274487807)" opacity="0.4">
+			<animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1" calcmod="spline" keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1" begin="0s" values="M0 0L 0 258.19200923029445Q 50 352.28219476673166  100 310.2722941139074T 200 213.59182461476934T 300 249.0921249754349T 400 244.2534785958841T 500 138.82668977145045L 500 0 Z;M0 0L 0 270.79536224783396Q 50 276.4585993370049  100 236.81546553617494T 200 262.2741075601301T 300 231.9654749143307T 400 174.1888875027377T 500 227.7246967661805L 500 0 Z;M0 0L 0 351.8413168436093Q 50 350.44136871331017  100 324.0859726879362T 200 240.89145696824295T 300 249.54285134577415T 400 208.9653119800271T 500 210.59318036645067L 500 0 Z;M0 0L 0 258.19200923029445Q 50 352.28219476673166  100 310.2722941139074T 200 213.59182461476934T 300 249.0921249754349T 400 244.2534785958841T 500 138.82668977145045L 500 0 Z">
+			</animate>
+		</path>
+		<path d="M 0 0 L 0 272.503 Q 50 301.593 100 277.158 T 200 293.23 T 300 266.427 T 400 193.533 T 500 213.933 L 500 0 Z" fill="url(#lg-0.6590519274487807)" opacity="0.4">
+			<animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1" calcmod="spline" keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1" begin="-2s" values="M0 0L 0 272.48523317130105Q 50 298.500980260828  100 273.73758820199123T 200 295.45385929390994T 300 264.708458670135T 400 192.63842807825162T 500 223.93897870130147L 500 0 Z;M0 0L 0 272.56825678924776Q 50 313.21684287925  100 290.0182799721473T 200 284.86754618484395T 300 272.8885965906303T 400 196.89537895690552T 500 176.31619869891844L 500 0 Z;M0 0L 0 272.48059381078434Q 50 267.556155800614  100 246.52900650418914T 200 295.7881078391602T 300 261.765138115722T 400 223.38641535079685T 500 224.86678867341215L 500 0 Z;M0 0L 0 272.48523317130105Q 50 298.500980260828  100 273.73758820199123T 200 295.45385929390994T 300 264.708458670135T 400 192.63842807825162T 500 223.93897870130147L 500 0 Z">
+			</animate>
+		</path>
+		<path d="M 0 0 L 0 175 Q 50 150 100 175 T 200 200 T 300 175 T 400 150 T 500 175 L 500 0 Z" fill="url(#lg-0.6590519274487807)" opacity="0.4">
+			<animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1" calcMode="spline" keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1" begin="0s" values="M0 0L 0 175Q 50 150 100 175T 200 200T 300 175T 400 150T 500 175L 500 0 Z;M0 0L 0 150Q 50 125 100 150T 200 175T 300 150T 400 125T 500 150L 500 0 Z;M0 0L 0 200Q 50 175 100 200T 200 225T 300 200T 400 175T 500 200L 500 0 Z;M0 0L 0 175Q 50 150 100 175T 200 200T 300 175T 400 150T 500 175L 500 0 Z">
+			</animate>
+		</path>
+		<path d="M 500 0 L 500 175 Q 450 150 400 175 T 300 200 T 200 175 T 100 150 T 0 175 L 0 0 Z" fill="url(#lg-0.6590519274487807)" opacity="0.4">
+			<animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1" calcMode="spline" keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1" begin="-2s" values="M500 0L 500 175Q 450 150 400 175T 300 200T 200 175T 100 150T 0 175L 0 0 Z;M500 0L 500 150Q 450 125 400 150T 300 175T 200 150T 100 125T 0 150L 0 0 Z;M500 0L 500 200Q 450 175 400 200T 300 225T 200 200T 100 175T 0 200L 0 0 Z;M500 0L 500 175Q 450 150 400 175T 300 200T 200 175T 100 150T 0 175L 0 0 Z">
+			</animate>
+		</path>
+		<path d="M 0 350 L 0 175 Q 50 200 100 175 T 200 150 T 300 175 T 400 200 T 500 175 L 500 350 Z" fill="url(#lg-0.6590519274487807)" opacity="0.4">
+			<animate attributeName="d" dur="10s" repeatCount="indefinite" keyTimes="0;0.333;0.667;1" calcMode="spline" keySplines="0.2 0 0.2 1;0.2 0 0.2 1;0.2 0 0.2 1" begin="-4s" values="M0 350L 0 175Q 50 200 100 175T 200 150T 300 175T 400 200T 500 175L 500 350 Z;M0 350L 0 200Q 50 225 100 200T 200 175T 300 200T 400 225T 500 200L 500 350 Z;M0 350L 0 150Q 50 175 100 150T 200 125T 300 150T 400 175T 500 150L 500 350 Z;M0 350L 0 175Q 50 200 100 175T 200 150T 300 175T 400 200T 500 175L 500 350 Z">
+			</animate>
+		</path>
+	</g>
+	<style type="text/css">
+		.lded > .content, .lded > .content > .inner { height: 100%; }
+		.lded > .content > .inner > .viewer { width: 100%; height: 100%; max-width: 100%; }
+		.lded > .content > .inner > .panel {
+		position: absolute;
+		bottom: 50px;
+		left: 0;
+		right: 0;
+		opacity: 0.3;
+		}
+		.lded > .content > .inner > .panel:hover { opacity: 1; }
+		.lded > .content > .inner > .ctrl {
+		position: absolute;
+		bottom: 13px;
+		left: 0;
+		right: 0;
+		margin: auto;
+		}
+		.lded > .content > .inner > .ctrl:hover {
+		z-index: 10;
+		}
+		#editor > .inner > .title {
+		position: absolute;
+		bottom: 195px;
+		left: 0;
+		right: 0;
+		z-index: 11;
+		}
+		#editor > .inner > .title > a:first-child {
+		margin-left: 0!important;
+		#editor .lded .viewer { border-radius: 0 }
+	</style>
+</svg>

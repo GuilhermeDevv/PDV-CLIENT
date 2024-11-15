@@ -7,30 +7,21 @@ export const Container = styled.section`
   background-color: ${({ theme }) => theme.background};
 `;
 export const Content = styled.form`
-  max-width: 40%;
-  margin: 0 auto;
-  padding: 2rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  gap: 1rem;
-  position: absolute;
-  inset: 0;
-
+  width: 100%;
+  height: 100svh;
   & input[type='text'],
   input[type='password'] {
     width: 100%;
-    height: 40px;
-    border: 2px solid ${({ theme }) => theme.text};
-    border-radius: 4px;
+    height: 48px;
+    border: 1px solid ${({ theme }) => theme.shadow};
+    border-radius: 6px;
     padding: 0 10px;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 1.5rem;
     color: ${({ theme }) => theme.textSecundary};
     outline: none;
     background-color: ${({ theme }) => theme.BackgroundInative};
-    padding-left: 40px;
     &::placeholder {
       color: ${({ theme }) => theme.textSecundary};
     }
@@ -41,36 +32,61 @@ export const Content = styled.form`
   }
 
   & button[type='submit'] {
-    width: 40%;
-    height: 40px;
+    width: 50%;
+    height: 58px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
-    color: ${({ theme }) => theme.textSecundary};
-    background-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.primary};
+    font-weight: bold;
+    background-color: ${({ theme }) => theme.iconActive};
     cursor: pointer;
     transition: background-color 0.2s;
     &:hover {
-      background-color: ${({ theme }) => theme.primaryDark};
+      background-color: ${({ theme }) => theme.iconInative};
     }
   }
 `;
 
+export const Left = styled.div`
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  background-color: ${({ theme }) => theme.backgroundSecundary};
+  /* background-color: red; */
+`;
+
+export const ContainerTitle = styled.div`
+  display: flex;
+  width: 50%;
+  flex-direction: column;
+
+  gap: 2rem;
+  color: ${({ theme }) => theme.text};
+  & p {
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.text};
+  }
+`;
 export const Title = styled.h1`
-  font-size: 2.5rem;
-  color: ${({ theme }) => theme.secundary};
+  font-size: 3rem;
+  color: inherit;
   font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-  font-style: italic;
 `;
 
 export const ContainerInput = styled.div`
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
+  width: 100%;
+  max-width: 50%;
+  gap: 0.5rem;
 
   & svg {
     position: absolute;
@@ -79,12 +95,18 @@ export const ContainerInput = styled.div`
       fill: ${({ theme }) => theme.icon};
     }
   }
+
+  & label {
+    font-size: 1.3rem;
+    color: ${({ theme }) => theme.textSecundary};
+    font-weight: bold;
+  }
 `;
 
 export const Actions = styled.div`
   display: flex;
   gap: 1rem;
-  width: 100%;
+  width: 50%;
   justify-content: space-between;
   align-items: center;
   color: ${({ theme }) => theme.textSecundary};
@@ -113,6 +135,13 @@ export const ForgotPassword = styled(Link)`
   transition: color 0.2s;
   font-style: italic;
   &:hover {
-    color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.iconInative};
   }
+`;
+
+export const Right = styled.div`
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background-color: purple;
 `;

@@ -23,8 +23,20 @@ export const Content = styled.form`
   padding: 20px;
   align-items: center;
   position: relative;
-
+  overflow: auto;
   max-height: 90%;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: ${({ theme }) => theme.background};
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.iconActive};
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.background};
+  }
   & > span {
     display: block;
     position: absolute;
@@ -55,7 +67,7 @@ export const Content = styled.form`
 
   & input[aria-label='Nome do cliente'] {
     width: 90%;
-    height: 40px;
+    min-height: 40px;
     border: 1px solid ${({ theme }) => theme.text};
     border-radius: 4px;
     padding: 0 10px;
@@ -76,7 +88,7 @@ export const Content = styled.form`
 
   & button {
     width: 90%;
-    height: 40px;
+    min-height: 40px;
     background-color: ${({ theme }) => theme.BackgroundInative};
     color: ${({ theme }) => theme.textSecundary};
     border: none;
@@ -235,9 +247,17 @@ export const Delete = styled.div`
     }
   }
 `;
+
+export const EditPrice = styled(Delete)`
+  &:hover {
+    svg,
+    path {
+      //yellow
+      color: #f0e68c;
+    }
+  }
+`;
 export const ContainerProducts = styled.div`
-  max-height: 300px;
-  overflow-y: auto;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -267,7 +287,20 @@ export const ContentProducts = styled.div`
 
 export const InputQuantity = styled.input`
   width: 50px;
-  height: 40px;
+  min-height: 40px;
+  border: 1px solid ${({ theme }) => theme.icon};
+  border-radius: 4px;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-size: 16px;
+  color: ${({ theme }) => theme.textSecundary};
+  outline: none;
+  background-color: ${({ theme }) => theme.BackgroundInative};
+`;
+
+export const InputPrice = styled.input`
+  width: 50%;
+  min-height: 40px;
   border: 1px solid ${({ theme }) => theme.icon};
   border-radius: 4px;
   padding: 0 10px;
@@ -280,7 +313,7 @@ export const InputQuantity = styled.input`
 
 export const Add = styled.div`
   width: 90%;
-  height: 40px;
+  min-height: 40px;
   background-color: ${({ theme }) => theme.BackgroundInative};
   color: ${({ theme }) => theme.textSecundary};
   border: none;

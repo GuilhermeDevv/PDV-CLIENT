@@ -24,12 +24,29 @@ function unformatCurrency(value: string) {
 }
 
 function formatCurrencyOnChange(value: string) {
+  // Remove todos os caracteres não numéricos
   let valueFormat = value.replace(/[^0-9]/g, '');
+
+  // Se o valor estiver vazio, retorna uma string vazia
+  if (valueFormat === '') {
+    return '';
+  }
+
+  // Adiciona a vírgula para separar os centavos
   if (valueFormat.length > 2) {
     valueFormat = valueFormat.slice(0, -2) + ',' + valueFormat.slice(-2);
+  } else if (valueFormat.length === 2) {
+    valueFormat = '0,' + valueFormat;
+  } else if (valueFormat.length === 1) {
+    valueFormat = '0,0' + valueFormat;
   }
+
+  // Adiciona pontos para separar os milhares
   valueFormat = valueFormat.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+  // Adiciona o símbolo de moeda
   valueFormat = `R$ ${valueFormat}`;
+
   return valueFormat;
 }
 

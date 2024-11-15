@@ -9,6 +9,7 @@ export interface IProduct {
   custo: number;
   descricao: string;
   isOnline?: boolean;
+  desconto: string;
 }
 
 export interface IProductReactSelect {

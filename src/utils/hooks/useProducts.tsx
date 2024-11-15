@@ -73,79 +73,6 @@ function useProducts({ client }: IuseProductsProps) {
     setTableFiltered(data ?? null);
   }
 
-  console.log(`
-    @echo off
-setlocal enabledelayedexpansion
-
-:: Pausa inicial para depuração
-echo Script iniciado com sucesso
-pause
-
-:: Função para iniciar os servidores
-:start_servers
-echo Iniciando o frontend e o backend...
-start cmd /k "cd PDV && cd client && npm run start"  
-start cmd /k "cd PDV && cd server && npm run dev"  
-echo Servidores iniciados.
-pause
-goto :menu
-
-:: Função para parar os servidores
-:stop_servers
-echo Parando o frontend e o backend...
-taskkill /F /IM "node.exe" /T
-echo Servidores parados.
-pause
-goto :menu
-
-:: Função para reiniciar os servidores
-:restart_servers
-echo Reiniciando servidores...
-call :stop_servers
-call :start_servers
-pause
-goto :menu
-
-:: Menu principal
-:menu
-cls
-echo ================================
-echo  Gerenciamento de Servidores
-echo ================================
-echo ================================
-echo 1. Iniciar servidores
-echo 2. Parar servidores
-echo 3. Reiniciar servidores
-echo 4. Sair
-echo ================================
-set /p choice="Escolha uma opcao: "
-
-if "%choice%" equ "1" (
-    echo Escolha: Iniciar servidores
-    goto start_servers
-) else if "%choice%" equ "2" (
-    echo Escolha: Parar servidores
-    goto stop_servers
-) else if "%choice%" equ "3" (
-    echo Escolha: Reiniciar servidores
-    goto restart_servers
-) else if "%choice%" equ "4" (
-    echo Escolha: Sair
-    pause
-    exit
-) else (
-    echo Opcao invalida! Tente novamente.
-    pause
-)
-
-pause
-goto :menu
-
-:: Pausa final para depuração
-echo Fim do script
-pause
-`);
-
   async function fetchProducts() {
     try {
       const response = await client.request({
@@ -161,7 +88,16 @@ pause
         id: row.id_produto,
         nome: row.nome,
         quantidade: row.quantidade,
-        preco: formatCurrency(row.preco.toString()),
+        preco:
+          +row.desconto !== 0
+            ? `${formatCurrency(row.preco.toString())} (${
+                row.desconto
+              }%) ${formatCurrency(
+                (row.preco - (row.preco * +row.desconto) / 100).toString()
+              )}`
+            : `${formatCurrency(row.preco.toString())}
+        `,
+        desconto: `${row.desconto}%`,
         descricao: row.descricao,
         custo: formatCurrency(row.custo.toString()),
         estoque: row.estoque,

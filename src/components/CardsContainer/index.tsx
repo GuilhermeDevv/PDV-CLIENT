@@ -4,11 +4,13 @@ import { Card } from './Card';
 import { Container, Content } from './styles';
 
 import { Skeleton } from '@mui/material';
+import { useTheme } from 'styled-components';
 export interface ICardsContainerProps {
   data: ICard[] | undefined;
 }
 
 export function CardsContainer({ data }: ICardsContainerProps) {
+  const theme = useTheme();
   return (
     <Container>
       <Content>
@@ -18,8 +20,8 @@ export function CardsContainer({ data }: ICardsContainerProps) {
             <Skeleton
               key={index}
               sx={{
-                borderRadius: 0.5,
-                backgroundColor: '#262626',
+                borderRadius: '8px',
+                backgroundColor: theme.background,
               }}
               animation="wave"
               variant="rectangular"

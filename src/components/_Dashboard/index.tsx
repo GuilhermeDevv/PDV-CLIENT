@@ -6,17 +6,20 @@ import { TitleComponent } from '@/components/Title';
 import { useDashboard } from '@/utils/hooks/useDashboard';
 import { GraphicsContainer } from '@/components/GraphicsContainer';
 import { httpClientFactory } from '@/adapters';
-import { StartScreen } from '@/components/StartScreen';
 
 export default function Dashboard() {
-  const { data, isAnimation } = useDashboard({
+  const { data } = useDashboard({
     client: httpClientFactory(),
   });
   return (
     <Main>
       <Container>
-        {isAnimation && <StartScreen />}
-        <TitleComponent text="DASHBOARD" />
+        <TitleComponent
+          text="Dashboard"
+          style={{
+            fontWeight: 'normal',
+          }}
+        />
         <CardsContainer data={data?.quantityInfo} />
         <GraphicsContainer
           quantityInfo={data?.quantityInfo}

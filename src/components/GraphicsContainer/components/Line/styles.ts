@@ -2,18 +2,34 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  min-height: 300px;
+  min-height: 400px;
   background-color: ${({ theme }) => theme.primary};
-  border-radius: 2px;
+  border-radius: 10px;
+  box-shadow: 1px 6px 7px 0px ${({ theme }) => theme.shadow};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-bottom: 20px;
   & h1 {
     position: absolute;
     top: 10px;
     left: 20px;
   }
+`;
+
+export const Top = styled.div`
+  z-index: 999;
+  display: flex;
+  width: 100%;
+  min-height: 0%;
+  justify-content: space-between;
+  padding-right: 20px;
+  position: relative;
+  top: 16px;
+`;
+
+export const ContainerSelect = styled.div`
+  width: 100%;
+  max-width: 200px;
 `;

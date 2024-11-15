@@ -1,6 +1,7 @@
 export interface IUser {
-  id_funcionario: String;
-  nome: String;
-  cargo: String;
-  senha: String;
+  id_funcionario: string;
+  nome: string;
+  cargo: string;
+  senha: string;
+  imagem?: string;
 }

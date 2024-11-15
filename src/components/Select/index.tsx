@@ -1,94 +1,111 @@
 'use client';
 
-import { forwardRef } from 'react';
+import { forwardRef, memo } from 'react';
 import { Container } from './styles';
 import Select, { Props, StylesConfig } from 'react-select';
 import { GroupBase } from 'react-select';
-
-const defaultStyles: StylesConfig = {
-  control: provided => ({
-    ...provided,
-    width: '100%',
-    backgroundColor: '#000',
-    borderColor: 'white',
-    color: '#a0a0a0',
-    boxShadow: 'none',
-    '&:hover': {
-      borderColor: 'transparent',
-    },
-    '& input': {
-      color: '#a0a0a0 !important',
-    },
-  }),
-  option: (provided, state) => ({
-    ...provided,
-    color: state.isSelected ? '#fff' : state.isFocused ? '#f00' : '#a0a0a0',
-    backgroundColor: state.isSelected
-      ? '#202020'
-      : state.isFocused
-      ? '#fff'
-      : provided.backgroundColor,
-
-    '&:hover': {
-      color: '#f00',
-      cursor: 'pointer',
-      backgroundColor: '#fff',
-    },
-  }),
-  menu: provided => ({
-    ...provided,
-    position: 'fixed',
-    backgroundColor: '#000',
-    top: '',
-    width: '',
-    borderColor: 'white',
-    '& > div::-webkit-scrollbar': {
-      width: '12px',
-      backgroundColor: '#000',
-    },
-    '& > div::-webkit-scrollbar-thumb': {
-      borderRadius: '10px',
-    },
-    '& > div::-webkit-scrollbar-track': {
-      backgroundColor: '#000',
-    },
-    // tirar o hover azul do menu
-    '&:hover': {
-      backgroundColor: '#000',
-    },
-  }),
-  placeholder: provided => ({
-    ...provided,
-    color: '#ccc',
-  }),
-  singleValue: provided => ({
-    ...provided,
-    color: '#a0a0a0',
-    backgroundColor: '#000',
-  }),
-  multiValue: provided => ({
-    ...provided,
-    backgroundColor: 'gray',
-  }),
-  multiValueLabel: provided => ({
-    ...provided,
-    color: 'white',
-  }),
-  multiValueRemove: provided => ({
-    ...provided,
-    color: 'white',
-    ':hover': {
-      backgroundColor: 'gray',
-      color: 'black',
-    },
-  }),
-};
+import { useTheme } from 'styled-components';
+import { IconCaretDown } from '@/assets/icons';
 
 interface IInputProps extends Props {}
 
 // eslint-disable-next-line react/display-name
 export const SelectComponent = forwardRef<Select, IInputProps>(
   ({ styles, ...rest }, ref) => {
+    const theme = useTheme();
+
+    const defaultStyles: StylesConfig = {
+      control: provided => ({
+        ...provided,
+        width: '100%',
+        backgroundColor: theme.background,
+        borderColor: theme.backgroundSecundary,
+        color: theme.text,
+        border: `1px solid ${theme.shadow}`,
+        borderRadius: '10px',
+        fontSize: '14px',
+        '&:hover': {
+          borderColor: theme.shadow,
+          cursor: 'pointer',
+          boxShadow: `inset 0px 0px 5px 0px ${theme.shadow}`,
+        },
+        '& input': {
+          color: '#a0a0a0 !important',
+        },
+      }),
+      option: (provided, state) => ({
+        ...provided,
+        color: state.isSelected
+          ? theme.iconActive
+          : state.isFocused
+          ? '#f00'
+          : theme.iconActive,
+        backgroundColor: state.isSelected
+          ? theme.backgroundActive
+          : state.isFocused
+          ? theme.background
+          : provided.backgroundColor,
+
+        '&:hover': {
+          color: theme.primary,
+          cursor: 'pointer',
+          backgroundColor: theme.iconActive,
+        },
+      }),
+      menu: provided => ({
+        ...provided,
+        backgroundColor: theme.background,
+        borderColor: 'white',
+        '& > div::-webkit-scrollbar': {
+          width: '12px',
+          backgroundColor: '#F00',
+        },
+        '& > div::-webkit-scrollbar-thumb': {
+          borderRadius: '10px',
+          backgroundColor: '#F00',
+        },
+        '& > div::-webkit-scrollbar-track': {
+          backgroundColor: '#000',
+        },
+
+        '&:hover': {
+          backgroundColor: theme.background,
+        },
+      }),
+      placeholder: provided => ({
+        ...provided,
+        color: theme.text,
+        fontWeight: 'bold',
+      }),
+      indicatorSeparator: provided => ({
+        ...provided,
+        backgroundColor: 'transparent',
+      }),
+
+      singleValue: provided => ({
+        ...provided,
+        color: theme.text,
+        fontWeight: 'bold',
+        backgroundColor: 'transparent',
+        // fontSize: '14px',
+      }),
+      multiValue: provided => ({
+        ...provided,
+        backgroundColor: 'gray',
+      }),
+      multiValueLabel: provided => ({
+        ...provided,
+        color: 'white',
+      }),
+      multiValueRemove: provided => ({
+        ...provided,
+        color: 'white',
+        ':hover': {
+          backgroundColor: 'gray',
+          color: 'black',
+        },
+      }),
+    };
     return (
       <Container>
         <Select
@@ -97,6 +114,17 @@ export const SelectComponent = forwardRef<Select, IInputProps>(
           noOptionsMessage={() => 'Nenhum resultado encontrado'}
           placeholder="Selecione..."
           className="react-select-container"
+          components={{
+            DropdownIndicator: () => (
+              <IconCaretDown
+                fill={theme.iconActive}
+                color={theme.iconActive}
+                style={{
+                  marginRight: '10px',
+                }}
+              />
+            ),
+          }}
           {...rest}
         />
       </Container>
@@ -104,4 +132,4 @@ export const SelectComponent = forwardRef<Select, IInputProps>(
   }
 );
 
-export default SelectComponent;
+export default memo(SelectComponent);

@@ -3,4 +3,5 @@ export interface ISale {
   id_produtos: string[];
   nome_cliente: string;
   id_venda: string;
+  valores: Record<string, number>;
 }

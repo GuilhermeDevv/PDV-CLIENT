@@ -8,9 +8,7 @@ export interface IData {
 }
 
 export interface IGraphicsProps {
-  name: string;
-  Atual: number;
-  Passada: number;
-  PassadaFormatado: string;
-  AtualFormatado: string;
+  v1: number;
+  v2: number;
+  color: string;
 }

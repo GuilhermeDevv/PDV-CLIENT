@@ -1,13 +1,13 @@
-import { ChangeEvent } from "react";
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { unformatCurrency } from "@/utils/formatCurrencyBR";
-import { IProductProps } from "..";
+import { ChangeEvent } from 'react';
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { unformatCurrency } from '@/utils/formatCurrencyBR';
+import { IProductProps } from '..';
 
 type IUsePopupProductsComponent = Pick<
   IProductProps,
-  "handleCreateProduct" | "fetchUpdateProduct" | "product"
+  'handleCreateProduct' | 'fetchUpdateProduct' | 'product'
 >;
 
 export function usePopupProductsComponent({
@@ -18,33 +18,34 @@ export function usePopupProductsComponent({
   const schema = z.object({
     id_produto: z.string().optional(),
     name: z.string({
-      message: "Nome inválido",
-      required_error: "Campo obrigatório",
+      message: 'Nome inválido',
+      required_error: 'Campo obrigatório',
     }),
     price: z
       .string({
-        message: "Valor inválido",
-        required_error: "Campo obrigatório",
+        message: 'Valor inválido',
+        required_error: 'Campo obrigatório',
       })
-      .default("R$"),
+      .default('R$'),
     cost_price: z
       .string({
-        message: "Valor inválido",
-        required_error: "Campo obrigatório",
+        message: 'Valor inválido',
+        required_error: 'Campo obrigatório',
       })
-      .default("R$"),
+      .default('R$'),
     stock: z.string({
-      message: "Valor inválido",
-      required_error: "Campo obrigatório",
+      message: 'Valor inválido',
+      required_error: 'Campo obrigatório',
     }),
     available_quantity: z.string({
-      message: "Valor inválido",
-      required_error: "Campo obrigatório",
+      message: 'Valor inválido',
+      required_error: 'Campo obrigatório',
     }),
     description: z.string({
-      message: "Descrição inválida",
-      required_error: "Campo obrigatório",
+      message: 'Descrição inválida',
+      required_error: 'Campo obrigatório',
     }),
+    discount: z.string().optional(),
   });
 
   const {
@@ -56,24 +57,25 @@ export function usePopupProductsComponent({
     resolver: zodResolver(schema),
   });
   function formatValue(event: ChangeEvent<HTMLInputElement>) {
-    let valueFormat = event.target.value.replace(/[^0-9]/g, "");
+    let valueFormat = event.target.value.replace(/[^0-9]/g, '');
     if (valueFormat.length > 2) {
-      valueFormat = valueFormat.slice(0, -2) + "," + valueFormat.slice(-2);
+      valueFormat = valueFormat.slice(0, -2) + ',' + valueFormat.slice(-2);
     }
-    valueFormat = valueFormat.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    valueFormat = valueFormat.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     valueFormat = `R$ ${valueFormat}`;
     setValue(event.target.name, valueFormat);
   }
 
   function handleChangeProduct(data: typeof schema._type) {
     const obj = {
-      id_produto: data.id_produto !== "" ? data.id_produto : undefined,
+      id_produto: data.id_produto !== '' ? data.id_produto : undefined,
       nome: data.name,
       preco: unformatCurrency(data.price),
       quantidade: +data.available_quantity,
       custo: unformatCurrency(data.cost_price),
       descricao: data.description,
       estoque: +data.stock,
+      desconto: data.discount ? +data.discount : 0,
     };
     if (product) {
       fetchUpdateProduct(obj as any);
@@ -89,5 +91,6 @@ export function usePopupProductsComponent({
     errors,
     formatValue,
     handleChangeProduct,
+    setValue,
   };
 }
