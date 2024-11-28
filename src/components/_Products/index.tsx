@@ -5,18 +5,20 @@ import { useProducts } from '@/utils/hooks/useProducts';
 import { SearchComponent } from '@/components/Search';
 import { Container, Main } from '@/app/styles';
 import { TitleComponent } from '@/components/Title';
-import { TableComponent } from '@/components/TableComponent';
 
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { PopupProductsComponent } from '@/components/PopupProducts';
 
 import { httpClientFactory } from '@/adapters';
 import { NotFound } from '@/components/NotFound';
+import { ProductsContainer } from '@/components/products-container';
+import { OrderByComponent } from '@/components/OrderByComponent';
 
 export default function Products() {
   const {
     table,
     tableFiltered,
+    handleOrderBy,
     handleFilterTable,
     setIsOpen,
     isOpen,
@@ -34,37 +36,37 @@ export default function Products() {
   return (
     <Main>
       <Container>
-        <TitleComponent text="PRODUTOS" />
+        <TitleComponent
+          text="Produtos"
+          style={{
+            fontWeight: 'normal',
+          }}
+        />
         <ContainerActions>
           <AddCircleRoundedIcon onClick={handleOpenPopup} />
           <SearchComponent
             placeholder="Pesquisar produtos..."
             onChange={e => handleFilterTable(e.target.value)}
           />
+          <OrderByComponent handleOrderBy={handleOrderBy} />
         </ContainerActions>
-        {/* {table || tableFiltered ? (
-          <TableComponent
-            table={tableFiltered ?? table ?? []}
-            setProductEdit={product => setProductEdit(product)}
-            isEditable
-            isOnline
-            handleChangeStatus={fetchChangeStatus}
-          />
-        ) : null} */}
-
         {/* {table && table.length === 0 && (
           <NotFound text="Nenhum produto encontrado !" />
         )} */}
-
-        {isOpen && (
-          <PopupProductsComponent
-            isLoading={isLoading}
-            setIsOpen={setIsOpen}
-            handleCreateProduct={handleCreateProduct}
-            product={productEdit}
-            fetchUpdateProduct={fetchUpdateProduct}
+        {table.length > 0 && (
+          <ProductsContainer
+            products={tableFiltered.length > 0 ? tableFiltered : table}
           />
         )}
+
+        <PopupProductsComponent
+          isOpen={isOpen}
+          isLoading={isLoading}
+          setIsOpen={setIsOpen}
+          handleCreateProduct={handleCreateProduct}
+          product={productEdit}
+          fetchUpdateProduct={fetchUpdateProduct}
+        />
       </Container>
     </Main>
   );

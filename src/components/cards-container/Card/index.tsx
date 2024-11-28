@@ -7,7 +7,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import ArrowCircleDownTwoToneIcon from '@mui/icons-material/ArrowCircleDownTwoTone';
 import ArrowCircleUpTwoToneIcon from '@mui/icons-material/ArrowCircleUpTwoTone';
 import ArrowCircleRightTwoToneIcon from '@mui/icons-material/ArrowCircleRightTwoTone';
-import { ICard } from '@/types';
+import { Card as ICard } from '@/types';
 import {
   Bottom,
   Container,

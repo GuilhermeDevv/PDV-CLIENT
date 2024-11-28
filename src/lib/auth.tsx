@@ -1,3 +1,4 @@
+import { user } from '@/types';
 import { IHttpClient } from '@/types/httpClient';
 
 type Auth = {
@@ -9,7 +10,7 @@ export async function authenticateUser({ client }: Auth) {
   if (!token) return false;
   try {
     const response = await client.request({
-      url: `${process.env.NEXT_PUBLIC_API_URL}/auth`,
+      url: `/auth`,
       method: 'get',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -22,12 +23,12 @@ export async function authenticateUser({ client }: Auth) {
 }
 
 // obter dados do usuário
-export async function getUser({ client }: Auth) {
+export async function getUser({ client }: Auth): Promise<user | false> {
   const token = window.localStorage.getItem('token');
   if (!token) return false;
   try {
     const { data } = await client.request({
-      url: `${process.env.NEXT_PUBLIC_API_URL}/user`,
+      url: `/user`,
       method: 'get',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -45,7 +46,7 @@ export const getInfoUser = async ({ client }: Auth) => {
   if (!token) return false;
   try {
     const { data } = await client.request({
-      url: `${process.env.NEXT_PUBLIC_API_URL}/user/info`,
+      url: `/user/info`,
       method: 'get',
       headers: {
         Authorization: `Bearer ${token}`,

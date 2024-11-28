@@ -8,6 +8,7 @@ import { Titillium_Web } from 'next/font/google';
 // COMPONENTS
 import { Menu } from '@/components/Menu';
 import { MenuLoading } from '@/components/MenuLoading';
+
 // ASSETS
 import GlobalStyle from '@/assets/styles';
 
@@ -63,7 +64,7 @@ export default function RootLayout({
       <body className={titillium_Web.className}>
         <TanstackProvider>
           <StyledComponentsProvider>
-            {isAuthenticated && pathname !== '/' && <Menu client={client} />}
+            {isAuthenticated && pathname !== '/' && <Menu />}
             {!isAuthenticated && pathname !== '/' && <MenuLoading />}
             {children}
             <GlobalStyle />

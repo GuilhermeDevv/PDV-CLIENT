@@ -16,7 +16,6 @@ import {
 } from './styles';
 
 import SettingsIcon from '@mui/icons-material/Settings';
-import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -25,19 +24,21 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
-import { useMenu } from './hooks';
-import { useTheme } from 'styled-components';
+import { useMenuModel } from './hooks/use-menu-model';
+
 import { useStoreNotification, useStoreUser } from '@/lib/store';
 import { AvatarComponent } from '../Avatar';
 import { IconCaretDown } from '@/assets/icons';
 import { UserProfile } from '../user-profile';
-import { IHttpClient } from '@/types/httpClient';
+import { ListUserService, ListInfoUserService } from '@/services/menu-service';
+import { httpClientFactory } from '@/adapters';
 
-export type MenuProps = {
-  client: IHttpClient;
-};
+export function Menu() {
+  const services = {
+    listUserService: new ListUserService(httpClientFactory()),
+    listInfoUserService: new ListInfoUserService(httpClientFactory()),
+  };
 
-export function Menu({ client }: MenuProps) {
   const {
     getActiveLink,
     Logo,
@@ -45,7 +46,8 @@ export function Menu({ client }: MenuProps) {
     IconSpeedometer,
     toogleMenuUser,
     isOpen,
-  } = useMenu(client);
+  } = useMenuModel(services);
+
   const { user } = useStoreUser(state => state);
   const { notification } = useStoreNotification(state => state);
 

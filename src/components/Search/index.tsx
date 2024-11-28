@@ -1,11 +1,16 @@
-"use client";
+'use client';
 
-import { Input } from "./styles";
-import { SearchComponentProps } from "./types";
+import { InputContainer, Input, SearchIcon } from './styles';
+import { SearchComponentProps } from './types';
 
 export function SearchComponent({
   placeholder,
   ...props
 }: SearchComponentProps) {
-  return <Input {...props} placeholder={placeholder ?? "Pesquisar"} />;
+  return (
+    <InputContainer>
+      <SearchIcon />
+      <Input {...props} placeholder={placeholder ?? 'Pesquisar'} />
+    </InputContainer>
+  );
 }

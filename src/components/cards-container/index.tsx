@@ -1,21 +1,21 @@
 'use client';
-import { ICard } from '@/types';
+import { Dashboard } from '@/types';
 import { Card } from './Card';
 import { Container, Content } from './styles';
 
 import { Skeleton } from '@mui/material';
 import { useTheme } from 'styled-components';
-export interface ICardsContainerProps {
-  data: ICard[] | undefined;
-}
 
-export function CardsContainer({ data }: ICardsContainerProps) {
+export function CardsContainer({
+  quantityInfo,
+}: Pick<Dashboard, 'quantityInfo'>) {
   const theme = useTheme();
   return (
     <Container>
       <Content>
-        {data && data.map((card, index) => <Card key={index} {...card} />)}
-        {!data &&
+        {quantityInfo &&
+          quantityInfo.map((card, index) => <Card key={index} {...card} />)}
+        {!quantityInfo &&
           Array.from({ length: 4 }).map((_, index) => (
             <Skeleton
               key={index}

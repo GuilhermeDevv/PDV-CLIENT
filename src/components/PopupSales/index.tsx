@@ -24,7 +24,7 @@ import {
 } from '@/utils/formatCurrencyBR';
 
 import { ISale } from '@/types';
-import { IProductReactSelect } from '@/types/IProduct';
+import { IProductReactSelect } from '@/types/product';
 import { usePopupSales } from './hooks/usePopupSales';
 
 import { SelectComponent } from '../Select';

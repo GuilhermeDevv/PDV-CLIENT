@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
   color:black;
   font-weight: 500;
   text-decoration-line: none;
+  user-select: none !important;
 }
 
 html{
@@ -32,6 +33,8 @@ body {
         width: 100svw;
         height: 100svh;
         scroll-behavior:smooth;
+        padding-right: 0px !important;
+        user-select: none !important;
 }
 `;
 

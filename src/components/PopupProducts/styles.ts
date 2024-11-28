@@ -3,20 +3,24 @@ import styled from 'styled-components';
 export const Container = styled.aside`
   position: fixed;
   inset: 0;
-  background-color: ${({ theme }) => theme.BackgroundInative};
-  z-index: 6;
+  /* background-color: ${({ theme }) => theme.BackgroundInative}; */
+  z-index: 40028922;
   display: flex;
   width: 100%;
   height: 100%;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const Content = styled.form`
   width: 80%;
-  width: 80%;
-  height: fit-content;
-  background-color: ${({ theme }) => theme.primary};
+  min-height: 80%;
+
+  /* background-color: ${({ theme }) => theme.primary}; */
+  background-color: red;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
@@ -126,3 +130,9 @@ export const Horizontal = styled.div`
     font-weight: bold;
   }
 `;
+
+// cadastro de produtos
+export const Left = styled.form``;
+
+// lista de produtos sendo cadastrados e botão de salvar
+export const Right = styled.section``;

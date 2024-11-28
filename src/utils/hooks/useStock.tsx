@@ -1,5 +1,5 @@
 'use client';
-import { IProduct } from '@/types/IProduct';
+import { IProduct } from '@/types/product';
 import { useEffect, useState } from 'react';
 import { formatCurrency } from '../formatCurrencyBR';
 import { ITable } from '@/types/ITable';

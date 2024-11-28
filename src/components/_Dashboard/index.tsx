@@ -1,16 +1,23 @@
 'use client';
+
 import { Container, Main } from '@/app/styles';
 
-import { CardsContainer } from '@/components/CardsContainer';
+import { useDashboardModel } from '@/utils/hooks/use-dashboard-model';
+import { ListDashboardService } from '@/services/dashboard-service';
+
+import { CardsContainer } from '@/components/cards-container';
 import { TitleComponent } from '@/components/Title';
-import { useDashboard } from '@/utils/hooks/useDashboard';
-import { GraphicsContainer } from '@/components/GraphicsContainer';
+import { GraphicsContainer } from '@/components/graphics-container';
+
 import { httpClientFactory } from '@/adapters';
 
 export default function Dashboard() {
-  const { data } = useDashboard({
-    client: httpClientFactory(),
-  });
+  const services = {
+    listCardService: new ListDashboardService(httpClientFactory()),
+  };
+
+  const { data } = useDashboardModel(services);
+
   return (
     <Main>
       <Container>
@@ -20,12 +27,12 @@ export default function Dashboard() {
             fontWeight: 'normal',
           }}
         />
-        <CardsContainer data={data?.quantityInfo} />
+        <CardsContainer quantityInfo={data?.quantityInfo!} />
         <GraphicsContainer
-          quantityInfo={data?.quantityInfo}
-          salesValue={data?.salesValue}
-          salesQuantity={data?.salesQuantity}
-          salesProfit={data?.salesProfit}
+          quantityInfo={data?.quantityInfo!}
+          salesValue={data?.salesValue!}
+          salesQuantity={data?.salesQuantity!}
+          salesProfit={data?.salesProfit!}
         />
       </Container>
     </Main>

@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,6 +15,8 @@ export function usePopupProductsComponent({
   fetchUpdateProduct,
   product,
 }: IUsePopupProductsComponent) {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
   const schema = z.object({
     id_produto: z.string().optional(),
     name: z.string({
@@ -85,6 +87,10 @@ export function usePopupProductsComponent({
     }
   }
 
+  const handleImageUpload = (url: string) => {
+    setImageUrl(url);
+  };
+
   return {
     register,
     handleSubmit,
@@ -92,5 +98,7 @@ export function usePopupProductsComponent({
     formatValue,
     handleChangeProduct,
     setValue,
+    imageUrl,
+    handleImageUpload,
   };
 }

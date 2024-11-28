@@ -1,5 +1,5 @@
-import { IProduct } from "@/types/IProduct";
-import { ITable } from "@/types/ITable";
+import { IProduct } from '@/types/product';
+import { ITable } from '@/types/ITable';
 export interface ITableComponentProps {
   table: ITable[];
   isEditable?: boolean;

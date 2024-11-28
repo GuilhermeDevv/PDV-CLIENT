@@ -1,7 +1,7 @@
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import { styled } from '@mui/material/styles';
 import { ptBR } from '@mui/x-data-grid/locales';
-import { IProduct } from '@/types/IProduct';
+import { IProduct } from '@/types/product';
 import { ButtonComponent } from '@/components/Button/Button';
 
 import Switch from '@mui/material/Switch';
