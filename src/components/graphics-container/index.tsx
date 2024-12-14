@@ -1,6 +1,6 @@
 'use client';
 
-import { IData } from '@/types/IDashboard';
+import { Dashboard } from '@/types';
 import { Bars } from './components/Bars';
 import { Line } from './components/Line';
 import { Container, Content, Top } from './styles';
@@ -11,7 +11,7 @@ export function GraphicsContainer({
   salesValue,
   salesQuantity,
   salesProfit,
-}: IData) {
+}: Dashboard) {
   const theme = useTheme();
   return (
     <Container>

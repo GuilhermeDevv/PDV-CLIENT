@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { IUser } from '@/types/IUser';
+import { IUser } from '@/types/user';
 import { INotification } from '@/types/INotification';
 
 interface StoreState {

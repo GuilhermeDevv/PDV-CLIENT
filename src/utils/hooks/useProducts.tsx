@@ -1,5 +1,5 @@
 'use client';
-import { IProduct } from '@/types/IProduct';
+import { product } from '@/types/product';
 import { useEffect, useState } from 'react';
 import { formatCurrency } from '../formatCurrencyBR';
 import { ITable } from '@/types/ITable';
@@ -12,11 +12,11 @@ export interface IuseProductsProps {
 
 function useProducts({ client }: IuseProductsProps) {
   const token = window.localStorage.getItem('token');
-  const [table, setTable] = useState<ITable[] | null>(null);
-  const [tableFiltered, setTableFiltered] = useState<ITable[] | null>(null);
+  const [table, setTable] = useState<product[]>([]);
+  const [tableFiltered, setTableFiltered] = useState<product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [productEdit, setProductEdit] = useState<IProduct | null>(null);
+  const [productEdit, setProductEdit] = useState<product | null>(null);
   const [fire, setFire] = useState(false);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function useProducts({ client }: IuseProductsProps) {
   }
 
   function handleFilterTable(search: string) {
-    if (!search) return setTableFiltered(null);
+    if (!search) return setTableFiltered([]);
 
     const searchNumber = Number(search);
 
@@ -70,19 +70,51 @@ function useProducts({ client }: IuseProductsProps) {
       );
     }
 
+    console.log(data, table);
+
     setTableFiltered(data ?? null);
+  }
+
+  function handleOrderBy(orderBy: string) {
+    if (orderBy === 'all') return setTableFiltered([]);
+
+    const data = [...table].sort((a, b) => {
+      if (orderBy === 'name') {
+        return a.nome.localeCompare(b.nome);
+      }
+      if (orderBy === 'asc') {
+        console.log(a.preco, b.preco);
+        return a.nome.localeCompare(b.nome);
+      }
+      if (orderBy === 'desc') {
+        return b.nome.localeCompare(a.nome);
+      }
+      if (orderBy === 'quantity_asc') {
+        return a.quantidade - b.quantidade;
+      }
+      if (orderBy === 'quantity_desc') {
+        return b.quantidade - a.quantidade;
+      }
+
+      return 0;
+    });
+
+    console.log(data);
+
+    setTableFiltered(data);
   }
 
   async function fetchProducts() {
     try {
       const response = await client.request({
-        url: `${process.env.NEXT_PUBLIC_API_URL}/produto`,
+        url: `/produto`,
         method: 'get',
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      const rows = response.data.data.map((row: IProduct) => ({
+      const rows = response.data.data.map((row: product) => ({
+        ...row,
         cor: row.cor,
         isOnline: row.isOnline,
         id: row.id_produto,
@@ -104,7 +136,7 @@ function useProducts({ client }: IuseProductsProps) {
       }));
 
       setTable(rows);
-      setTableFiltered(null);
+      setTableFiltered([]);
     } catch (err) {
       console.log(err);
       swal.fire({
@@ -115,7 +147,7 @@ function useProducts({ client }: IuseProductsProps) {
     }
   }
 
-  async function handleCreateProduct(data: IProduct) {
+  async function handleCreateProduct(data: product) {
     setIsLoading(true);
     try {
       await client.request({
@@ -140,7 +172,7 @@ function useProducts({ client }: IuseProductsProps) {
     setIsLoading(false);
   }
 
-  async function fetchUpdateProduct(data: IProduct) {
+  async function fetchUpdateProduct(data: product) {
     setIsLoading(true);
     try {
       await client.request({
@@ -178,6 +210,7 @@ function useProducts({ client }: IuseProductsProps) {
   return {
     table,
     tableFiltered,
+    handleOrderBy,
     handleFilterTable,
     setIsOpen,
     isOpen,

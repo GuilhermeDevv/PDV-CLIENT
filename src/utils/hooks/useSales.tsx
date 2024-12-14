@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useBoxStore } from '@/context/useBox';
 import { formatCurrency } from '../formatCurrencyBR';
 import { IFormatDate } from '@/types/formatDate';
-import { IProductReactSelect } from '@/types/IProduct';
+import { IProductReactSelect } from '@/types/product';
 import swal from 'sweetalert2';
 
 export interface IUseSalesProps {

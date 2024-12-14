@@ -7,18 +7,22 @@ import {
   Content,
   Horizontal,
   InputContainer,
+  Left,
+  Right,
 } from './styles';
-import { IProduct } from '@/types/IProduct';
+import { product } from '@/types/product';
+import { ImageUploader } from '@/components/image-uploader';
 import CloseIcon from '@mui/icons-material/Close';
 import { usePopupProductsComponent } from './hooks/usePopupProductsComponent';
 import { formatPercent } from '@/utils/formatPercent';
 
 export interface IProductProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  product: IProduct | null;
+  product: product | null;
   isLoading: boolean;
-  handleCreateProduct: (data: IProduct) => Promise<void>;
-  fetchUpdateProduct: (data: IProduct) => Promise<void>;
+  handleCreateProduct: (data: product) => Promise<void>;
+  fetchUpdateProduct: (data: product) => Promise<void>;
+  isOpen: boolean;
 }
 
 export function PopupProductsComponent({
@@ -27,8 +31,8 @@ export function PopupProductsComponent({
   handleCreateProduct,
   fetchUpdateProduct,
   isLoading,
+  isOpen,
 }: IProductProps) {
-  console.log(product);
   const {
     errors,
     formatValue,
@@ -36,17 +40,16 @@ export function PopupProductsComponent({
     handleSubmit,
     register,
     setValue,
+    handleImageUpload,
+    imageUrl,
   } = usePopupProductsComponent({
     fetchUpdateProduct,
     handleCreateProduct,
     product,
   });
 
-  return (
-    <Container
-      onSubmit={handleSubmit(data => handleChangeProduct(data as any))}
-    >
-      <Content>
+  {
+    /* <Content>
         <span>
           <CloseIcon onClick={() => setIsOpen(false)} />
         </span>
@@ -130,7 +133,9 @@ export function PopupProductsComponent({
                 min={0}
                 max={100}
                 placeholder="DIGITE O DESCONTO"
-                defaultValue={product ? +product.desconto.split('%')[0] : 0}
+                defaultValue={
+                  product ? +product.desconto.toString().split('%')[0] : 0
+                }
                 style={{ width: '87%' }}
               />
               <span>%</span>
@@ -146,7 +151,35 @@ export function PopupProductsComponent({
             'ADICIONAR'
           )}
         </button>
-      </Content>
+      </Content> */
+  }
+
+  return (
+    <Container
+      onSubmit={handleSubmit(data => handleChangeProduct(data as any))}
+    >
+      <Left>
+        {/* IMAGEM DO PRODUTO IMPORTADO DA MAQUINA DO USUARIO OU LINK */}
+        <ImageUploader onImageUpload={handleImageUpload} />
+
+        {/*  NOME DO PRODUTO */}
+
+        {/* PREÇO DO PRODUTO */}
+
+        {/* ESTOQUE COMPRADO */}
+
+        {/* QUANTIDADE DISPONIVEL */}
+
+        {/* DESCONTO */}
+
+        {/* SELECT DE CATEGORIA (VAI SER RETORNADO DO BANCO AS CATEGORIAS DISPONIVEIS) */}
+
+        {/* DESCRIÇÃO */}
+
+        {/* FORNECEDOR OU MARCA */}
+      </Left>
+
+      <Right>{/* PREVISUALIZAÇÃO DOS PRODUTOS */}</Right>
     </Container>
   );
 }

@@ -11,18 +11,12 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { IGraphicsProps } from '@/types/IDashboard';
+
 import { CustomTooltipContent } from './components';
 import { useTheme } from 'styled-components';
 import Select from '@/components/Select';
 import { useStoreOptionsChart } from '@/lib/store';
-export function Bars({
-  data,
-  title,
-}: {
-  data: IGraphicsProps[];
-  title?: string;
-}) {
+export function Bars({ data, title }: { data: any; title?: string }) {
   const theme = useTheme();
   const { optionsChart } = useStoreOptionsChart();
 
