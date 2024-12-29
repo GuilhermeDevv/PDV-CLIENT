@@ -14,11 +14,15 @@ export const DropArea = styled.div`
   width: 100%;
   max-width: 300px;
   height: 150px;
-  border: 2px dashed #ccc;
+  border: 2px dashed ${({ theme }) => theme.iconActive};
   border-radius: 4px;
   text-align: center;
   padding: 10px;
   cursor: pointer;
+  color: ${({ theme }) => theme.textSecundary};
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
 `;
 
 export const Input = styled.input`
@@ -46,4 +50,8 @@ export const ImagePreview = styled.img`
   max-height: 300px;
   border: 1px solid #ccc;
   border-radius: 4px;
+
+  /* remover o fundo da imagem usando o mix-blend-mode */
+
+  mix-blend-mode: darken;
 `;

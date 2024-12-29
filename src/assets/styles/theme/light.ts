@@ -61,8 +61,10 @@ const LightTheme: ITheme = {
   senaryBackground: '#ff5e5e',
 };
 
+
+
 declare module 'styled-components' {
   export interface DefaultTheme extends ITheme {}
 }
 
-export default LightTheme;
+  export default LightTheme;

@@ -4,6 +4,7 @@
 import React, { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Titillium_Web } from 'next/font/google';
+import { Varela_Round } from 'next/font/google';
 
 // COMPONENTS
 import { Menu } from '@/components/Menu';
@@ -30,6 +31,14 @@ const titillium_Web = Titillium_Web({
   display: 'optional',
   preload: true,
   style: ['normal', 'italic'],
+  subsets: ['latin-ext'],
+});
+
+const varela_Round = Varela_Round({
+  weight: ['400'],
+  display: 'optional',
+  preload: true,
+  style: ['normal'],
   subsets: ['latin-ext'],
 });
 
@@ -61,14 +70,14 @@ export default function RootLayout({
 
   return (
     <html lang="pt-br">
-      <body className={titillium_Web.className}>
+      <body className={varela_Round.className}>
         <TanstackProvider>
           <StyledComponentsProvider>
             {isAuthenticated && pathname !== '/' && <Menu />}
             {!isAuthenticated && pathname !== '/' && <MenuLoading />}
             {children}
             <GlobalStyle />
-          </StyledComponentsProvider>
+            </StyledComponentsProvider>
         </TanstackProvider>
       </body>
     </html>

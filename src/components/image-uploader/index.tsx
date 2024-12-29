@@ -30,7 +30,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({
           onDragOver={handleDragOver}
           onClick={handleClick}
         >
-          Arraste uma imagem aqui, cole com Ctrl + V ou clique para selecionar
+          Arraste e solte a imagem aqui ou clique para selecionar
           <input
             type="file"
             accept="image/*"
