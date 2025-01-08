@@ -7,3 +7,4 @@ export type { SalesProfit } from './sales-profit';
 export type { SalesValue } from './sales-value';
 export type { SalesQuantity } from './sales-quantity';
 export type { user } from './user';
+export type { Box } from './box';

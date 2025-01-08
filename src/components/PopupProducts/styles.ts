@@ -125,9 +125,9 @@ export const Left = styled.form`
   gap: 12px;
 
   background: ${({ theme }) => theme.primary};
-  border-top: 1px solid ${({ theme }) => theme.shadow};
+  border-right: 2px solid ${({ theme }) => theme.shadow};
   height: 100%;
-  padding: 20px;
+  padding: 16px;
 
   overflow-y: auto;
 
@@ -227,4 +227,7 @@ export const ButtonAdd = styled(Button)`
 `;
 
 // lista de produtos sendo cadastrados e botão de salvar
-export const Right = styled.section``;
+export const Right = styled.section`
+  background: ${({ theme }) => theme.primary};
+  flex: 1;
+`;

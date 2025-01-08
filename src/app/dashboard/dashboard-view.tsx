@@ -1,23 +1,13 @@
-'use client';
+import { useDashboardModel } from './use-dashboard-model';
 
 import { Container, Main } from '@/app/styles';
-
-import { useDashboardModel } from '@/utils/hooks/use-dashboard-model';
-import { ListDashboardService } from '@/services/dashboard-service';
 
 import { CardsContainer } from '@/components/cards-container';
 import { TitleComponent } from '@/components/Title';
 import { GraphicsContainer } from '@/components/graphics-container';
 
-import { httpClientFactory } from '@/adapters';
-
-export default function Dashboard() {
-  const services = {
-    listCardService: new ListDashboardService(httpClientFactory()),
-  };
-
-  const { data } = useDashboardModel(services);
-
+export function DashboardView(props: ReturnType<typeof useDashboardModel>) {
+  const { data } = props;
   return (
     <Main>
       <Container>

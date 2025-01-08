@@ -23,6 +23,7 @@ import Select from '../Select';
 
 import { usePopupProductsComponent } from './hooks/usePopupProductsComponent';
 import { formatPercent } from '@/utils/formatPercent';
+import { Product } from './components/product';
 export interface IProductProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   product: product | null;
@@ -62,7 +63,6 @@ export function PopupProductsComponent({
       <Left>
         {/* IMAGEM DO PRODUTO IMPORTADO DA MAQUINA DO USUARIO OU LINK */}
         <ImageUploader onImageUpload={handleImageUpload} />
-        
 
         {/*  NOME DO PRODUTO */}
         <InputComponent
@@ -151,7 +151,14 @@ export function PopupProductsComponent({
         </ContainerActions>
       </Left>
 
-      <Right>{/* PREVISUALIZAÇÃO DOS PRODUTOS JÁ CRIADOS */}</Right>
+      <Right>
+        {/* PREVISUALIZAÇÃO DOS PRODUTOS JÁ CRIADOS */}
+
+        <Product
+          src="/eu.jpeg"
+          title={'produto de teste para visualização de conteudo do produto'}
+        />
+      </Right>
     </Container>
   );
 }
